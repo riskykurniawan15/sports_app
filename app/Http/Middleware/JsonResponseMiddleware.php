@@ -20,8 +20,17 @@ class JsonResponseMiddleware
         $response = $next($request);
         
         // If response is not JSON and it's an API route, convert to JSON
+        // But skip file responses (images, documents, etc.)
         $contentType = $response->headers->get('Content-Type');
         if ($request->is('api/*') && $contentType && !str_contains($contentType, 'application/json')) {
+            // Skip file responses (images, documents, etc.)
+            if (str_contains($contentType, 'image/') || 
+                str_contains($contentType, 'application/pdf') ||
+                str_contains($contentType, 'application/octet-stream') ||
+                str_contains($contentType, 'text/plain')) {
+                return $response;
+            }
+            
             return response()->json([
                 'code' => [
                     'status' => $response->getStatusCode(),

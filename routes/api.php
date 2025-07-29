@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\WilayahController;
+use App\Http\Controllers\FileUploadController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +34,11 @@ Route::controller(WilayahController::class)->group(function () {
     Route::post('provinces/{provinceCode}/clear-cache', 'clearRegenciesCache');
 });
 
+// Public image access (no authentication required)
+Route::controller(FileUploadController::class)->group(function () {
+    Route::get('image/{filename}', 'showImage')->name('api.image.show');
+});
+
 // Protected routes (authentication required)
 Route::middleware('auth:api')->group(function () {
     Route::controller(AuthController::class)->group(function () {
@@ -40,7 +46,8 @@ Route::middleware('auth:api')->group(function () {
         Route::get('user-profile', 'userProfile');
     });
     
-    Route::get('/user', function (Request $request) {
-        return $request->user();
+    // File upload routes (protected)
+    Route::controller(FileUploadController::class)->group(function () {
+        Route::post('upload/image', 'uploadImage');
     });
 }); 
