@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\WilayahController;
 use App\Http\Controllers\FileUploadController;
+use App\Http\Controllers\TeamController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,5 +50,14 @@ Route::middleware('auth:api')->group(function () {
     // File upload routes (protected)
     Route::controller(FileUploadController::class)->group(function () {
         Route::post('upload/image', 'uploadImage');
+    });
+    
+    // Team routes (protected)
+    Route::controller(TeamController::class)->group(function () {
+        Route::get('teams', 'index');
+        Route::post('teams', 'store');
+        Route::get('teams/{id}', 'show');
+        Route::put('teams/{id}', 'update');
+        Route::delete('teams/{id}', 'destroy');
     });
 }); 

@@ -9,15 +9,21 @@ trait ApiResponse
     /**
      * Success response
      */
-    protected function successResponse($data = null, string $message = 'Success', int $statusCode = 200): JsonResponse
+    protected function successResponse($data = null, string $message = 'Success', int $statusCode = 200, array $meta = null): JsonResponse
     {
-        return response()->json([
+        $response = [
             'code' => [
                 'status' => $statusCode,
                 'message' => $message
             ],
             'data' => $data
-        ], $statusCode);
+        ];
+
+        if ($meta) {
+            $response['meta'] = $meta;
+        }
+
+        return response()->json($response, $statusCode);
     }
 
     /**
@@ -101,6 +107,6 @@ trait ApiResponse
      */
     protected function deletedResponse(string $message = 'Resource deleted successfully'): JsonResponse
     {
-        return $this->successResponse(null, $message, 200);
+        return $this->successResponse(null, $message, 204);
     }
 } 
