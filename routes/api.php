@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\WilayahController;
 use App\Http\Controllers\FileUploadController;
 use App\Http\Controllers\TeamController;
+use App\Http\Controllers\PositionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -59,5 +60,11 @@ Route::middleware('auth:api')->group(function () {
         Route::get('teams/{id}', 'show');
         Route::put('teams/{id}', 'update');
         Route::delete('teams/{id}', 'destroy');
+    });
+
+    // Public position routes (no authentication required)
+    Route::controller(PositionController::class)->group(function () {
+        Route::get('positions', 'index');
+        Route::get('positions/{id}', 'show');
     });
 }); 
