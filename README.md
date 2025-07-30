@@ -10,7 +10,7 @@ API Laravel 12.x yang komprehensif untuk mengelola tim olahraga, pemain, pertand
 - **Penjadwalan Pertandingan** - Pembuatan pertandingan dengan deteksi konflik
 - **Aktivitas Pertandingan** - Event pertandingan real-time (gol, kartu, substitusi, dll)
 - **Laporan Pertandingan** - Statistik dan laporan pertandingan yang komprehensif
-- **Upload File** - Upload gambar untuk logo tim dan foto pemain
+- **Upload File** - Upload gambar untuk logo tim
 - **Data Geografis** - Integrasi dengan API wilayah.id untuk provinsi/kota Indonesia
 - **Soft Deletes** - Pelestarian data dengan fungsi soft delete
 - **Respons API Terstandarisasi** - Format respons JSON yang konsisten
