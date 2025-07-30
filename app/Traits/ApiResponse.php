@@ -3,9 +3,35 @@
 namespace App\Traits;
 
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\DB;
 
 trait ApiResponse
 {
+    /**
+     * Run closure in transactions. 
+     * Auto-Rollback If the status response >= 400.
+     */
+    protected function safeTransaction(callable $callback): JsonResponse
+    {
+        DB::beginTransaction();
+
+        try {
+            /** @var JsonResponse $response */
+            $response = $callback();
+
+            if ($response instanceof JsonResponse && $response->getStatusCode() >= 400) {
+                DB::rollBack();
+            } else {
+                DB::commit();
+            }
+
+            return $response;
+        } catch (\Throwable $e) {
+            DB::rollBack();
+            throw $e; // Let Laravel Handler handle the error
+        }
+    }
+
     /**
      * Success response
      */

@@ -213,7 +213,7 @@ Endpoint registrasi memerlukan header `X-API-Key` untuk keamanan.
 - `name` - Nama tim (max 100 karakter)
 - `logo` - URL logo tim (max 250 karakter)
 - `established_year` - Tahun berdirinya tim
-- `address` - Alamat tim (text)
+- `address` - Alamat markas tim (text)
 - `city` - Kode kota (divalidasi dengan API wilayah.id)
 
 ### Pemain

@@ -77,44 +77,40 @@ class MatchActivityController extends ApiController
      */
     public function store(Request $request, $matchId)
     {
-        try {
-            return DB::transaction(function () use ($request, $matchId) {
-                // Validate match exists
-                $match = GameMatch::find($matchId);
-                if (!$match) {
-                    return $this->notFoundResponse('Match not found');
-                }
+        return $this->safeTransaction(function () use ($request, $matchId) {
+            // Validate match exists
+            $match = GameMatch::find($matchId);
+            if (!$match) {
+                return $this->notFoundResponse('Match not found');
+            }
 
-                // Add match_id to request data
-                $request->merge(['match_id' => $matchId]);
-                
-                $validator = Validator::make($request->all(), MatchActivity::getCreateRules());
-                
-                if ($validator->fails()) {
-                    return $this->validationErrorResponse($validator->errors());
-                }
-                
-                $activity = MatchActivity::create($request->all());
-                $activity->load(['match', 'team', 'player']);
-                
-                // If this is match_end activity, calculate and update match result
-                if ($activity->activity === 'match_end') {
-                    $match = GameMatch::find($activity->match_id);
-                    if ($match) {
-                        $result =$match->calculateMatchResult();
-                        if (!$result['save_success']) {
-                            // Handle save failure
-                            return $this->errorResponse('Failed to update match result', 500);
-                        }
-                        $activity->match->refresh(); // Refresh to get updated metadata
+            // Add match_id to request data
+            $request->merge(['match_id' => $matchId]);
+            
+            $validator = Validator::make($request->all(), MatchActivity::getCreateRules());
+            
+            if ($validator->fails()) {
+                return $this->validationErrorResponse($validator->errors());
+            }
+            
+            $activity = MatchActivity::create($request->all());
+            $activity->load(['match', 'team', 'player']);
+            
+            // If this is match_end activity, calculate and update match result
+            if ($activity->activity === 'match_end') {
+                $match = GameMatch::find($activity->match_id);
+                if ($match) {
+                    $result =$match->calculateMatchResult();
+                    if (!$result['save_success']) {
+                        // Handle save failure
+                        return $this->errorResponse('Failed to update match result', 500);
                     }
+                    $activity->match->refresh(); // Refresh to get updated metadata
                 }
-                
-                return $this->createdResponse($activity, 'Match activity created successfully');
-            });
-        } catch (\Exception $e) {
-            return $this->errorResponse('Failed to create match activity: ' . $e->getMessage(), 500);
-        }
+            }
+            
+            return $this->createdResponse($activity, 'Match activity created successfully');
+        });
     }
 
     /**
