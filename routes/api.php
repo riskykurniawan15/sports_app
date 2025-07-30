@@ -8,6 +8,7 @@ use App\Http\Controllers\FileUploadController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\PositionController;
 use App\Http\Controllers\PlayerController;
+use App\Http\Controllers\MatchController;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,7 +64,7 @@ Route::middleware('auth:api')->group(function () {
         Route::delete('teams/{id}', 'destroy');
     });
 
-        // Public position routes (no authentication required)
+        // Public position routes (protected)
     Route::controller(PositionController::class)->group(function () {
         Route::get('positions', 'index');
         Route::get('positions/{id}', 'show');
@@ -76,5 +77,14 @@ Route::middleware('auth:api')->group(function () {
         Route::get('players/{id}', 'show');
         Route::put('players/{id}', 'update');
         Route::delete('players/{id}', 'destroy');
+    });
+
+    // Match routes (protected)
+    Route::controller(MatchController::class)->group(function () {
+        Route::get('matches', 'index');
+        Route::post('matches', 'store');
+        Route::get('matches/{id}', 'show');
+        Route::put('matches/{id}', 'update');
+        Route::delete('matches/{id}', 'destroy');
     });
 } ); 
