@@ -12,6 +12,7 @@ class AuthController extends ApiController
     public function __construct()
     {
         $this->middleware('auth:api', ['except' => ['login', 'register']]);
+        $this->middleware('api.key', ['only' => ['register']]);
     }
 
     /**
@@ -95,7 +96,7 @@ class AuthController extends ApiController
         return $this->successResponse([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => config('jwt.ttl') * 60,
+            'expires_in' => (int) config('jwt.ttl'),
             'user' => auth('api')->user()
         ], 'Login successful');
     }

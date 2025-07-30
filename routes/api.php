@@ -25,7 +25,7 @@ use App\Http\Controllers\MatchActivityController;
 // Public routes (no authentication required)
 Route::controller(AuthController::class)->group(function () {
     Route::post('login', 'login');
-    Route::post('register', 'register');
+    Route::post('register', 'register')->middleware('api.key');
 });
 
 // Wilayah routes (no authentication required)

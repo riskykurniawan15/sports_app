@@ -14,6 +14,11 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         // Add JSON response middleware for API routes
         $middleware->append(\App\Http\Middleware\JsonResponseMiddleware::class);
+    
+    // Register custom middleware aliases
+    $middleware->alias([
+        'api.key' => \App\Http\Middleware\ApiKeyMiddleware::class,
+    ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
