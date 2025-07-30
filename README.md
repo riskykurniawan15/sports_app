@@ -1,3 +1,8 @@
+# Jawaban Soal
+Klik tombol di bawah untuk melihat jawaban soal test:
+
+[![Tampilkan Jawaban](https://img.shields.io/badge/Lihat%20Jawaban-PDF-red?style=for-the-badge&logo=adobeacrobatreader&logoColor=white)](https://github.com/riskykurniawan15/sports_app/blob/master/answare.pdf)
+
 # Sports App API
 
 API Laravel 12.x yang komprehensif untuk mengelola tim olahraga, pemain, pertandingan, dan aktivitas pertandingan dengan autentikasi JWT.

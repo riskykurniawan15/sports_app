@@ -256,13 +256,14 @@ class GameMatch extends Model
         }
 
         $this->match_metadata = $metadata;
-        $this->save();
+        $saveResult = $this->save();
 
         return [
             'status' => $status,
             'scores_home' => $homeGoals,
             'scores_away' => $awayGoals,
-            'winner_team' => $winnerTeam
+            'winner_team' => $winnerTeam,
+            'save_success' => $saveResult
         ];
     }
 

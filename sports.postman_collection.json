@@ -137,13 +137,13 @@
 							"type": "apikey",
 							"apikey": [
 								{
-									"key": "key",
-									"value": "X-API-Key",
+									"key": "value",
+									"value": "{{x_api_key}}",
 									"type": "string"
 								},
 								{
-									"key": "value",
-									"value": "risky",
+									"key": "key",
+									"value": "X-API-Key",
 									"type": "string"
 								}
 							]
@@ -348,13 +348,13 @@
 							"type": "apikey",
 							"apikey": [
 								{
-									"key": "key",
-									"value": "X-API-Key",
+									"key": "value",
+									"value": "{{x_api_key}}",
 									"type": "string"
 								},
 								{
-									"key": "value",
-									"value": "risky",
+									"key": "key",
+									"value": "X-API-Key",
 									"type": "string"
 								}
 							]
@@ -524,13 +524,13 @@
 							"type": "apikey",
 							"apikey": [
 								{
-									"key": "key",
-									"value": "X-API-Key",
+									"key": "value",
+									"value": "{{x_api_key}}",
 									"type": "string"
 								},
 								{
-									"key": "value",
-									"value": "risky",
+									"key": "key",
+									"value": "X-API-Key",
 									"type": "string"
 								}
 							]
@@ -3981,6 +3981,11 @@
 		{
 			"key": "access_token",
 			"value": ""
+		},
+		{
+			"key": "x_api_key",
+			"value": "risky",
+			"type": "string"
 		}
 	]
 }
