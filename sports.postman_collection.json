@@ -1,0 +1,3808 @@
+{
+	"info": {
+		"_postman_id": "76d63471-d7f1-44ca-b4d2-e697ae4dbc2c",
+		"name": "sports",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "46987795"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Parse response\r",
+									"let jsonData = pm.response.json();\r",
+									"\r",
+									"if (pm.response.code === 200 && jsonData.data && jsonData.data.access_token) {\r",
+									"    // Simpan token ke variable di collection\r",
+									"    pm.collectionVariables.set(\"access_token\", jsonData.data.access_token);\r",
+									"    console.log(\"Token disimpan:\", jsonData.data.access_token);\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"riskykurniawan15@gmail.com\",\r\n    \"password\": \"kurniawan\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/api/login",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"riskykurniawan15@gmail.com\",\r\n    \"password\": \"kurniawan\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{server}}/api/login",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 29 Jul 2025 07:22:56 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": {\n        \"status\": 200,\n        \"message\": \"Login successful\"\n    },\n    \"data\": {\n        \"access_token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNzUzNzczNzc2LCJleHAiOjE3NTM3NzczNzYsIm5iZiI6MTc1Mzc3Mzc3NiwianRpIjoiQUhudGw0MmtxaUlGWnBLRyIsInN1YiI6IjIiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.SFghPV7RPaW_PkIVQbCi4_lD_Oc8dFAZIDbNNpSKjRQ\",\n        \"token_type\": \"bearer\",\n        \"expires_in\": 3600,\n        \"user\": {\n            \"id\": 2,\n            \"name\": \"Risky Kurniawan\",\n            \"email\": \"riskykurniawan15@gmail.com\",\n            \"email_verified_at\": null,\n            \"created_at\": \"2025-07-29T07:22:47.000000Z\",\n            \"updated_at\": \"2025-07-29T07:22:47.000000Z\"\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "register",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "X-API-Key",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "risky",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Risky Kurniawan\",\r\n    \"email\": \"riskykurniawan15@gmail.com\",\r\n    \"password\": \"kurniawan\",\r\n    \"password_confirmation\": \"kurniawan\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"register"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "register",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Risky Kurniawan\",\r\n    \"email\": \"riskykurniawan15@gmail.com\",\r\n    \"password\": \"kurniawan\",\r\n    \"password_confirmation\": \"kurniawan\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8000/api/register",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"register"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 29 Jul 2025 07:22:48 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": {\n        \"status\": 201,\n        \"message\": \"User successfully registered\"\n    },\n    \"data\": {\n        \"user\": {\n            \"name\": \"Risky Kurniawan\",\n            \"email\": \"riskykurniawan15@gmail.com\",\n            \"updated_at\": \"2025-07-29T07:22:47.000000Z\",\n            \"created_at\": \"2025-07-29T07:22:47.000000Z\",\n            \"id\": 2\n        },\n        \"authorization\": {\n            \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL3JlZ2lzdGVyIiwiaWF0IjoxNzUzNzczNzY4LCJleHAiOjE3NTM3NzczNjgsIm5iZiI6MTc1Mzc3Mzc2OCwianRpIjoiWkJYSmp3RHR5WFM1cEdnSCIsInN1YiI6IjIiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.T36833RZea6PZcEIebExDod3hnPBH5dts36U0bDOh6U\",\n            \"type\": \"bearer\"\n        }\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "prov-reg",
+			"item": [
+				{
+					"name": "provinces",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/api/provinces",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"api",
+								"provinces"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "ace",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "provinces",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{server}}/api/provinces",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"provinces"
+									],
+									"query": [
+										{
+											"key": "search",
+											"value": "ace",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 30 Jul 2025 08:58:38 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": {\n        \"status\": 200,\n        \"message\": \"All provinces retrieved successfully\"\n    },\n    \"data\": [\n        {\n            \"code\": \"11\",\n            \"name\": \"Aceh\"\n        },\n        {\n            \"code\": \"51\",\n            \"name\": \"Bali\"\n        },\n        {\n            \"code\": \"36\",\n            \"name\": \"Banten\"\n        },\n        {\n            \"code\": \"17\",\n            \"name\": \"Bengkulu\"\n        },\n        {\n            \"code\": \"34\",\n            \"name\": \"Daerah Istimewa Yogyakarta\"\n        },\n        {\n            \"code\": \"31\",\n            \"name\": \"DKI Jakarta\"\n        },\n        {\n            \"code\": \"75\",\n            \"name\": \"Gorontalo\"\n        },\n        {\n            \"code\": \"15\",\n            \"name\": \"Jambi\"\n        },\n        {\n            \"code\": \"32\",\n            \"name\": \"Jawa Barat\"\n        },\n        {\n            \"code\": \"33\",\n            \"name\": \"Jawa Tengah\"\n        },\n        {\n            \"code\": \"35\",\n            \"name\": \"Jawa Timur\"\n        },\n        {\n            \"code\": \"61\",\n            \"name\": \"Kalimantan Barat\"\n        },\n        {\n            \"code\": \"63\",\n            \"name\": \"Kalimantan Selatan\"\n        },\n        {\n            \"code\": \"62\",\n            \"name\": \"Kalimantan Tengah\"\n        },\n        {\n            \"code\": \"64\",\n            \"name\": \"Kalimantan Timur\"\n        },\n        {\n            \"code\": \"65\",\n            \"name\": \"Kalimantan Utara\"\n        },\n        {\n            \"code\": \"19\",\n            \"name\": \"Kepulauan Bangka Belitung\"\n        },\n        {\n            \"code\": \"21\",\n            \"name\": \"Kepulauan Riau\"\n        },\n        {\n            \"code\": \"18\",\n            \"name\": \"Lampung\"\n        },\n        {\n            \"code\": \"81\",\n            \"name\": \"Maluku\"\n        },\n        {\n            \"code\": \"82\",\n            \"name\": \"Maluku Utara\"\n        },\n        {\n            \"code\": \"52\",\n            \"name\": \"Nusa Tenggara Barat\"\n        },\n        {\n            \"code\": \"53\",\n            \"name\": \"Nusa Tenggara Timur\"\n        },\n        {\n            \"code\": \"91\",\n            \"name\": \"Papua\"\n        },\n        {\n            \"code\": \"92\",\n            \"name\": \"Papua Barat\"\n        },\n        {\n            \"code\": \"96\",\n            \"name\": \"Papua Barat Daya\"\n        },\n        {\n            \"code\": \"95\",\n            \"name\": \"Papua Pegunungan\"\n        },\n        {\n            \"code\": \"93\",\n            \"name\": \"Papua Selatan\"\n        },\n        {\n            \"code\": \"94\",\n            \"name\": \"Papua Tengah\"\n        },\n        {\n            \"code\": \"14\",\n            \"name\": \"Riau\"\n        },\n        {\n            \"code\": \"76\",\n            \"name\": \"Sulawesi Barat\"\n        },\n        {\n            \"code\": \"73\",\n            \"name\": \"Sulawesi Selatan\"\n        },\n        {\n            \"code\": \"72\",\n            \"name\": \"Sulawesi Tengah\"\n        },\n        {\n            \"code\": \"74\",\n            \"name\": \"Sulawesi Tenggara\"\n        },\n        {\n            \"code\": \"71\",\n            \"name\": \"Sulawesi Utara\"\n        },\n        {\n            \"code\": \"13\",\n            \"name\": \"Sumatera Barat\"\n        },\n        {\n            \"code\": \"16\",\n            \"name\": \"Sumatera Selatan\"\n        },\n        {\n            \"code\": \"12\",\n            \"name\": \"Sumatera Utara\"\n        }\n    ],\n    \"meta\": {\n        \"total\": 38,\n        \"search\": null,\n        \"cache_info\": {\n            \"provinces\": {\n                \"has_cache\": true,\n                \"cache_time\": 86400,\n                \"cache_key\": \"wilayah_provinces\"\n            },\n            \"regencies\": {\n                \"cache_time\": 86400,\n                \"cache_pattern\": \"wilayah_regencies_*\"\n            }\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "regencies",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/api/provinces/32?search=",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"api",
+								"provinces",
+								"32"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "regencies",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{server}}/api/provinces/32?search=",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"provinces",
+										"32"
+									],
+									"query": [
+										{
+											"key": "search",
+											"value": ""
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 30 Jul 2025 08:58:46 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": {\n        \"status\": 200,\n        \"message\": \"Regencies retrieved successfully\"\n    },\n    \"data\": {\n        \"province\": {\n            \"code\": \"32\",\n            \"name\": \"Jawa Barat\"\n        },\n        \"regencies\": [\n            {\n                \"code\": \"32.04\",\n                \"name\": \"Kabupaten Bandung\"\n            },\n            {\n                \"code\": \"32.17\",\n                \"name\": \"Kabupaten Bandung Barat\"\n            },\n            {\n                \"code\": \"32.16\",\n                \"name\": \"Kabupaten Bekasi\"\n            },\n            {\n                \"code\": \"32.01\",\n                \"name\": \"Kabupaten Bogor\"\n            },\n            {\n                \"code\": \"32.07\",\n                \"name\": \"Kabupaten Ciamis\"\n            },\n            {\n                \"code\": \"32.03\",\n                \"name\": \"Kabupaten Cianjur\"\n            },\n            {\n                \"code\": \"32.09\",\n                \"name\": \"Kabupaten Cirebon\"\n            },\n            {\n                \"code\": \"32.05\",\n                \"name\": \"Kabupaten Garut\"\n            },\n            {\n                \"code\": \"32.12\",\n                \"name\": \"Kabupaten Indramayu\"\n            },\n            {\n                \"code\": \"32.15\",\n                \"name\": \"Kabupaten Karawang\"\n            },\n            {\n                \"code\": \"32.08\",\n                \"name\": \"Kabupaten Kuningan\"\n            },\n            {\n                \"code\": \"32.10\",\n                \"name\": \"Kabupaten Majalengka\"\n            },\n            {\n                \"code\": \"32.18\",\n                \"name\": \"Kabupaten Pangandaran\"\n            },\n            {\n                \"code\": \"32.14\",\n                \"name\": \"Kabupaten Purwakarta\"\n            },\n            {\n                \"code\": \"32.13\",\n                \"name\": \"Kabupaten Subang\"\n            },\n            {\n                \"code\": \"32.02\",\n                \"name\": \"Kabupaten Sukabumi\"\n            },\n            {\n                \"code\": \"32.11\",\n                \"name\": \"Kabupaten Sumedang\"\n            },\n            {\n                \"code\": \"32.06\",\n                \"name\": \"Kabupaten Tasikmalaya\"\n            },\n            {\n                \"code\": \"32.73\",\n                \"name\": \"Kota Bandung\"\n            },\n            {\n                \"code\": \"32.79\",\n                \"name\": \"Kota Banjar\"\n            },\n            {\n                \"code\": \"32.75\",\n                \"name\": \"Kota Bekasi\"\n            },\n            {\n                \"code\": \"32.71\",\n                \"name\": \"Kota Bogor\"\n            },\n            {\n                \"code\": \"32.77\",\n                \"name\": \"Kota Cimahi\"\n            },\n            {\n                \"code\": \"32.74\",\n                \"name\": \"Kota Cirebon\"\n            },\n            {\n                \"code\": \"32.76\",\n                \"name\": \"Kota Depok\"\n            },\n            {\n                \"code\": \"32.72\",\n                \"name\": \"Kota Sukabumi\"\n            },\n            {\n                \"code\": \"32.78\",\n                \"name\": \"Kota Tasikmalaya\"\n            }\n        ]\n    },\n    \"meta\": {\n        \"total\": 27,\n        \"search\": null,\n        \"cache_info\": {\n            \"provinces\": {\n                \"has_cache\": true,\n                \"cache_time\": 86400,\n                \"cache_key\": \"wilayah_provinces\"\n            },\n            \"regencies\": {\n                \"cache_time\": 86400,\n                \"cache_pattern\": \"wilayah_regencies_*\"\n            }\n        }\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "get-profile",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer YOUR_JWT_TOKEN_HERE"
+							}
+						],
+						"url": {
+							"raw": "{{server}}/api/user-profile",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"api",
+								"user-profile"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "get-profile",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer YOUR_JWT_TOKEN_HERE"
+									}
+								],
+								"url": {
+									"raw": "{{server}}/api/user-profile",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"user-profile"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 29 Jul 2025 09:57:51 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": {\n        \"status\": 200,\n        \"message\": \"User profile retrieved successfully\"\n    },\n    \"data\": {\n        \"id\": 2,\n        \"name\": \"Risky Kurniawan\",\n        \"email\": \"riskykurniawan15@gmail.com\",\n        \"email_verified_at\": null,\n        \"created_at\": \"2025-07-29T07:22:47.000000Z\",\n        \"updated_at\": \"2025-07-29T07:22:47.000000Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "update-profile",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer YOUR_JWT_TOKEN"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Risky Updated\",\n    \"email\": \"riskykurniawan15@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/api/user-profile",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"api",
+								"user-profile"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "update-profile",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer YOUR_JWT_TOKEN"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Risky Updated\",\n    \"email\": \"riskykurniawan15@gmail.com\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{server}}/api/user-profile",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"user-profile"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 30 Jul 2025 09:55:44 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": {\n        \"status\": 200,\n        \"message\": \"Profile updated successfully\"\n    },\n    \"data\": {\n        \"id\": 2,\n        \"name\": \"Risky Updated\",\n        \"email\": \"riskykurniawan15@gmail.com\",\n        \"email_verified_at\": null,\n        \"created_at\": \"2025-07-29T07:22:47.000000Z\",\n        \"updated_at\": \"2025-07-30T09:55:44.000000Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "update-password",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer YOUR_JWT_TOKEN"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"current_password\": \"kurniawan\",\n    \"new_password\": \"kurniawan\",\n    \"new_password_confirmation\": \"kurniawan\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/api/user-password",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"api",
+								"user-password"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "update-password",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer YOUR_JWT_TOKEN"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"current_password\": \"kurniawan\",\n    \"new_password\": \"kurniawan\",\n    \"new_password_confirmation\": \"kurniawan\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{server}}/api/user-password",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"user-password"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 30 Jul 2025 09:58:02 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": {\n        \"status\": 200,\n        \"message\": \"Password updated successfully\"\n    },\n    \"data\": null\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "file-uploader",
+			"item": [
+				{
+					"name": "file uploader",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer YOUR_JWT_TOKEN"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"description": "jpeg,png,jpg",
+									"type": "file",
+									"src": "postman-cloud:///1f06cf22-04eb-4580-8dd9-03c99672b980"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{server}}/api/upload/image",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"api",
+								"upload",
+								"image"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "file uploader",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer YOUR_JWT_TOKEN"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "image",
+											"type": "file",
+											"src": "/C:/Users/risky/Downloads/risky.jpg"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{server}}/api/upload/image",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"upload",
+										"image"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 29 Jul 2025 10:13:06 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": {\n        \"status\": 200,\n        \"message\": \"Image uploaded successfully\"\n    },\n    \"data\": {\n        \"url\": \"http://localhost:8000/api/image/2_1753783986_n6PqNOTMRq.jpg\",\n        \"filename\": \"2_1753783986_n6PqNOTMRq.jpg\",\n        \"original_name\": \"risky.jpg\",\n        \"size\": 99344,\n        \"mime_type\": \"image/jpeg\",\n        \"storage_path\": \"logo/2_1753783986_n6PqNOTMRq.jpg\"\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "teams",
+			"item": [
+				{
+					"name": "store",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer YOUR_TOKEN_HERE"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Persib Bandung\",\n    \"logo\": \"http://localhost:8000/api/image/2_1753844830_V4m4Rc83uM.png\",\n    \"established_year\": 1933,\n    \"address\": \"Jl. Soekarno-Hatta No. 402, Bandung\",\n    \"city\": \"32.73\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/teams",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"teams"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "store",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer YOUR_TOKEN_HERE"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Persib Bandung\",\n    \"logo\": \"http://localhost:8000/api/image/2_1753844830_V4m4Rc83uM.png\",\n    \"established_year\": 1933,\n    \"address\": \"Jl. Soekarno-Hatta No. 402, Bandung\",\n    \"city\": \"32.73\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8000/api/teams",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"teams"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 30 Jul 2025 03:10:48 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": {\n        \"status\": 201,\n        \"message\": \"Team created successfully\"\n    },\n    \"data\": {\n        \"name\": \"Persib Bandung\",\n        \"logo\": \"http://localhost:8000/api/image/2_1753844830_V4m4Rc83uM.png\",\n        \"established_year\": 1933,\n        \"address\": \"Jl. Soekarno-Hatta No. 402, Bandung\",\n        \"city\": \"32.73\",\n        \"updated_at\": \"2025-07-30T03:10:48.000000Z\",\n        \"created_at\": \"2025-07-30T03:10:48.000000Z\",\n        \"id\": 2\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "list",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/api/teams",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"api",
+								"teams"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "list",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{server}}/api/teams",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"teams"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 30 Jul 2025 03:33:32 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": {\n        \"status\": 200,\n        \"message\": \"Teams retrieved successfully\"\n    },\n    \"data\": [\n        {\n            \"id\": 2,\n            \"name\": \"Persib Bandung\",\n            \"logo\": \"http://localhost:8000/api/image/2_1753844830_V4m4Rc83uM.png\",\n            \"established_year\": 1933,\n            \"address\": \"Jl. Soekarno-Hatta No. 402, Bandung\",\n            \"city\": \"32.73\",\n            \"created_at\": \"2025-07-30T03:10:48.000000Z\",\n            \"updated_at\": \"2025-07-30T03:10:48.000000Z\",\n            \"city_name\": \"Kota Bandung\",\n            \"province_name\": \"Jawa Barat\"\n        }\n    ],\n    \"meta\": {\n        \"pagination\": {\n            \"current_page\": 1,\n            \"last_page\": 1,\n            \"per_page\": 10,\n            \"total\": 1,\n            \"from\": 1,\n            \"to\": 1\n        },\n        \"filters\": {\n            \"search\": null,\n            \"city\": null\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "detail",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer YOUR_TOKEN_HERE"
+							}
+						],
+						"url": {
+							"raw": "{{server}}/api/teams/:id",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"api",
+								"teams",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "detail",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer YOUR_TOKEN_HERE"
+									}
+								],
+								"url": {
+									"raw": "{{server}}/api/teams/:id",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"teams",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 30 Jul 2025 03:35:08 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": {\n        \"status\": 200,\n        \"message\": \"Team retrieved successfully\"\n    },\n    \"data\": {\n        \"id\": 2,\n        \"name\": \"Persib Bandung\",\n        \"logo\": \"http://localhost:8000/api/image/2_1753844830_V4m4Rc83uM.png\",\n        \"established_year\": 1933,\n        \"address\": \"Jl. Soekarno-Hatta No. 402, Bandung\",\n        \"city\": \"32.73\",\n        \"created_at\": \"2025-07-30T03:10:48.000000Z\",\n        \"updated_at\": \"2025-07-30T03:10:48.000000Z\",\n        \"city_name\": \"Kota Bandung\",\n        \"province_name\": \"Jawa Barat\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer YOUR_TOKEN_HERE"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Persib Bandung FC\",\n    \"established_year\": 1933\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/api/teams/:id",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"api",
+								"teams",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "update",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer YOUR_TOKEN_HERE"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Persib Bandung FC\",\n    \"established_year\": 1933\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{server}}/api/teams/:id",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"teams",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 30 Jul 2025 03:36:23 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": {\n        \"status\": 200,\n        \"message\": \"Team updated successfully\"\n    },\n    \"data\": {\n        \"id\": 2,\n        \"name\": \"Persib Bandung FC\",\n        \"logo\": \"http://localhost:8000/api/image/2_1753844830_V4m4Rc83uM.png\",\n        \"established_year\": 1933,\n        \"address\": \"Jl. Soekarno-Hatta No. 402, Bandung\",\n        \"city\": \"32.73\",\n        \"created_at\": \"2025-07-30T03:10:48.000000Z\",\n        \"updated_at\": \"2025-07-30T03:36:23.000000Z\",\n        \"city_name\": \"Kota Bandung\",\n        \"province_name\": \"Jawa Barat\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer YOUR_TOKEN_HERE"
+							}
+						],
+						"url": {
+							"raw": "{{server}}/api/teams/:id",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"api",
+								"teams",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "delete",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer YOUR_TOKEN_HERE"
+									}
+								],
+								"url": {
+									"raw": "{{server}}/api/teams/:id",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"teams",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 30 Jul 2025 03:39:17 GMT"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "position",
+			"item": [
+				{
+					"name": "list",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{server}}/api/positions",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"api",
+								"positions"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "playmaker",
+									"disabled": true
+								},
+								{
+									"key": "category",
+									"value": "midfielder",
+									"disabled": true
+								},
+								{
+									"key": "per_page",
+									"value": "10",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "list",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{server}}/api/positions",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"positions"
+									],
+									"query": [
+										{
+											"key": "search",
+											"value": "playmaker",
+											"disabled": true
+										},
+										{
+											"key": "category",
+											"value": "midfielder",
+											"disabled": true
+										},
+										{
+											"key": "per_page",
+											"value": "10",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 30 Jul 2025 03:57:12 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": {\n        \"status\": 200,\n        \"message\": \"Positions retrieved successfully\"\n    },\n    \"data\": [\n        {\n            \"id\": 17,\n            \"code\": \"AM\",\n            \"name\": \"Attacking Midfielder\",\n            \"desc\": \"Gelandang serang\",\n            \"created_at\": null,\n            \"updated_at\": null\n        },\n        {\n            \"id\": 24,\n            \"code\": \"AP\",\n            \"name\": \"Advanced Playmaker\",\n            \"desc\": \"Playmaker menyerang\",\n            \"created_at\": null,\n            \"updated_at\": null\n        },\n        {\n            \"id\": 15,\n            \"code\": \"B2B\",\n            \"name\": \"Box-to-Box Midfielder\",\n            \"desc\": \"Gelandang serba bisa\",\n            \"created_at\": null,\n            \"updated_at\": null\n        },\n        {\n            \"id\": 16,\n            \"code\": \"CAM\",\n            \"name\": \"Central Attacking Midfielder\",\n            \"desc\": \"Gelandang serang\",\n            \"created_at\": null,\n            \"updated_at\": null\n        },\n        {\n            \"id\": 2,\n            \"code\": \"CB\",\n            \"name\": \"Centre Back\",\n            \"desc\": \"Bek tengah\",\n            \"created_at\": null,\n            \"updated_at\": null\n        },\n        {\n            \"id\": 13,\n            \"code\": \"CDM\",\n            \"name\": \"Central Defensive Midfielder\",\n            \"desc\": \"Gelandang bertahan\",\n            \"created_at\": null,\n            \"updated_at\": null\n        },\n        {\n            \"id\": 27,\n            \"code\": \"CF\",\n            \"name\": \"Centre Forward\",\n            \"desc\": \"Penyerang tengah\",\n            \"created_at\": null,\n            \"updated_at\": null\n        },\n        {\n            \"id\": 12,\n            \"code\": \"CM\",\n            \"name\": \"Centre Midfielder\",\n            \"desc\": \"Gelandang tengah\",\n            \"created_at\": null,\n            \"updated_at\": null\n        },\n        {\n            \"id\": 9,\n            \"code\": \"CWB\",\n            \"name\": \"Complete Wing Back\",\n            \"desc\": \"Bek sayap serba bisa ofensif\",\n            \"created_at\": null,\n            \"updated_at\": null\n        },\n        {\n            \"id\": 22,\n            \"code\": \"DLP\",\n            \"name\": \"Deep Lying Playmaker\",\n            \"desc\": \"Pengatur serangan dari belakang\",\n            \"created_at\": null,\n            \"updated_at\": null\n        },\n        {\n            \"id\": 14,\n            \"code\": \"DM\",\n            \"name\": \"Defensive Midfielder\",\n            \"desc\": \"Gelandang bertahan\",\n            \"created_at\": null,\n            \"updated_at\": null\n        },\n        {\n            \"id\": 35,\n            \"code\": \"F9\",\n            \"name\": \"False 9\",\n            \"desc\": \"Penyerang palsu yang turun ke tengah\",\n            \"created_at\": null,\n            \"updated_at\": null\n        },\n        {\n            \"id\": 1,\n            \"code\": \"GK\",\n            \"name\": \"Goalkeeper\",\n            \"desc\": \"Penjaga gawang\",\n            \"created_at\": null,\n            \"updated_at\": null\n        },\n        {\n            \"id\": 26,\n            \"code\": \"HB\",\n            \"name\": \"Half Back\",\n            \"desc\": \"Gelandang bertahan turun ke bek\",\n            \"created_at\": null,\n            \"updated_at\": null\n        },\n        {\n            \"id\": 33,\n            \"code\": \"IF\",\n            \"name\": \"Inside Forward\",\n            \"desc\": \"Penyerang sayap menusuk\",\n            \"created_at\": null,\n            \"updated_at\": null\n        },\n        {\n            \"id\": 10,\n            \"code\": \"IFB\",\n            \"name\": \"Inverted Full Back\",\n            \"desc\": \"Bek sayap masuk ke tengah\",\n            \"created_at\": null,\n            \"updated_at\": null\n        },\n        {\n            \"id\": 32,\n            \"code\": \"IW\",\n            \"name\": \"Inverted Winger\",\n            \"desc\": \"Winger yang sering masuk ke tengah\",\n            \"created_at\": null,\n            \"updated_at\": null\n        },\n        {\n            \"id\": 5,\n            \"code\": \"LB\",\n            \"name\": \"Left Back\",\n            \"desc\": \"Bek sayap kiri\",\n            \"created_at\": null,\n            \"updated_at\": null\n        },\n        {\n            \"id\": 3,\n            \"code\": \"LCB\",\n            \"name\": \"Left Centre Back\",\n            \"desc\": \"Bek tengah kiri\",\n            \"created_at\": null,\n            \"updated_at\": null\n        },\n        {\n            \"id\": 18,\n            \"code\": \"LM\",\n            \"name\": \"Left Midfielder\",\n            \"desc\": \"Gelandang kiri\",\n            \"created_at\": null,\n            \"updated_at\": null\n        },\n        {\n            \"id\": 30,\n            \"code\": \"LW\",\n            \"name\": \"Left Winger\",\n            \"desc\": \"Penyerang sayap kiri\",\n            \"created_at\": null,\n            \"updated_at\": null\n        },\n        {\n            \"id\": 7,\n            \"code\": \"LWB\",\n            \"name\": \"Left Wing Back\",\n            \"desc\": \"Bek sayap kiri menyerang\",\n            \"created_at\": null,\n            \"updated_at\": null\n        },\n        {\n            \"id\": 20,\n            \"code\": \"LWM\",\n            \"name\": \"Left Wide Midfielder\",\n            \"desc\": \"Gelandang sayap kiri melebar\",\n            \"created_at\": null,\n            \"updated_at\": null\n        },\n        {\n            \"id\": 38,\n            \"code\": \"PF\",\n            \"name\": \"Pressing Forward\",\n            \"desc\": \"Striker yang fokus menekan lawan\",\n            \"created_at\": null,\n            \"updated_at\": null\n        },\n        {\n            \"id\": 37,\n            \"code\": \"PO\",\n            \"name\": \"Poacher\",\n            \"desc\": \"Striker pemburu gol di kotak penalti\",\n            \"created_at\": null,\n            \"updated_at\": null\n        },\n        {\n            \"id\": 6,\n            \"code\": \"RB\",\n            \"name\": \"Right Back\",\n            \"desc\": \"Bek sayap kanan\",\n            \"created_at\": null,\n            \"updated_at\": null\n        },\n        {\n            \"id\": 4,\n            \"code\": \"RCB\",\n            \"name\": \"Right Centre Back\",\n            \"desc\": \"Bek tengah kanan\",\n            \"created_at\": null,\n            \"updated_at\": null\n        },\n        {\n            \"id\": 19,\n            \"code\": \"RM\",\n            \"name\": \"Right Midfielder\",\n            \"desc\": \"Gelandang kanan\",\n            \"created_at\": null,\n            \"updated_at\": null\n        },\n        {\n            \"id\": 23,\n            \"code\": \"RPM\",\n            \"name\": \"Roaming Playmaker\",\n            \"desc\": \"Playmaker bebas bergerak\",\n            \"created_at\": null,\n            \"updated_at\": null\n        },\n        {\n            \"id\": 31,\n            \"code\": \"RW\",\n            \"name\": \"Right Winger\",\n            \"desc\": \"Penyerang sayap kanan\",\n            \"created_at\": null,\n            \"updated_at\": null\n        },\n        {\n            \"id\": 8,\n            \"code\": \"RWB\",\n            \"name\": \"Right Wing Back\",\n            \"desc\": \"Bek sayap kanan menyerang\",\n            \"created_at\": null,\n            \"updated_at\": null\n        },\n        {\n            \"id\": 21,\n            \"code\": \"RWM\",\n            \"name\": \"Right Wide Midfielder\",\n            \"desc\": \"Gelandang sayap kanan melebar\",\n            \"created_at\": null,\n            \"updated_at\": null\n        },\n        {\n            \"id\": 29,\n            \"code\": \"SS\",\n            \"name\": \"Second Striker\",\n            \"desc\": \"Penyerang bayangan\",\n            \"created_at\": null,\n            \"updated_at\": null\n        },\n        {\n            \"id\": 28,\n            \"code\": \"ST\",\n            \"name\": \"Striker\",\n            \"desc\": \"Penyerang murni\",\n            \"created_at\": null,\n            \"updated_at\": null\n        },\n        {\n            \"id\": 11,\n            \"code\": \"SW\",\n            \"name\": \"Sweeper\",\n            \"desc\": \"Libero (bek sapu)\",\n            \"created_at\": null,\n            \"updated_at\": null\n        },\n        {\n            \"id\": 36,\n            \"code\": \"TM\",\n            \"name\": \"Target Man\",\n            \"desc\": \"Penyerang pemantul bola\",\n            \"created_at\": null,\n            \"updated_at\": null\n        },\n        {\n            \"id\": 25,\n            \"code\": \"TQ\",\n            \"name\": \"Trequartista\",\n            \"desc\": \"Playmaker bebas di depan\",\n            \"created_at\": null,\n            \"updated_at\": null\n        },\n        {\n            \"id\": 34,\n            \"code\": \"WF\",\n            \"name\": \"Wide Forward\",\n            \"desc\": \"Penyerang sayap lebar\",\n            \"created_at\": null,\n            \"updated_at\": null\n        }\n    ],\n    \"meta\": {\n        \"pagination\": {\n            \"current_page\": 1,\n            \"last_page\": 1,\n            \"per_page\": 50,\n            \"total\": 38,\n            \"from\": 1,\n            \"to\": 38\n        },\n        \"filters\": {\n            \"search\": null,\n            \"category\": null\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "detail",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{server}}/api/positions/:id",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"api",
+								"positions",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "detail",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{server}}/api/positions/:id",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"positions",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 30 Jul 2025 04:00:19 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": {\n        \"status\": 200,\n        \"message\": \"Position retrieved successfully\"\n    },\n    \"data\": {\n        \"id\": 1,\n        \"code\": \"GK\",\n        \"name\": \"Goalkeeper\",\n        \"desc\": \"Penjaga gawang\",\n        \"created_at\": null,\n        \"updated_at\": null\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "players",
+			"item": [
+				{
+					"name": "list",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer YOUR_JWT_TOKEN"
+							}
+						],
+						"url": {
+							"raw": "{{server}}/api/players",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"api",
+								"players"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "list",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer YOUR_JWT_TOKEN"
+									}
+								],
+								"url": {
+									"raw": "{{server}}/api/players",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"players"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 30 Jul 2025 04:36:07 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": {\n        \"status\": 200,\n        \"message\": \"Players retrieved successfully\"\n    },\n    \"data\": [\n        {\n            \"id\": 1,\n            \"name\": \"Lionel Messi\",\n            \"team_id\": 2,\n            \"squad_number\": 11,\n            \"height\": 170,\n            \"weight\": 75,\n            \"position_id\": 25,\n            \"created_at\": \"2025-07-30T04:34:40.000000Z\",\n            \"updated_at\": \"2025-07-30T04:35:42.000000Z\",\n            \"team\": {\n                \"id\": 2,\n                \"name\": \"Persib Bandung FC\",\n                \"logo\": \"http://localhost:8000/api/image/2_1753844830_V4m4Rc83uM.png\",\n                \"established_year\": 1933,\n                \"address\": \"Jl. Soekarno-Hatta No. 402, Bandung\",\n                \"city\": \"32.73\",\n                \"created_at\": \"2025-07-30T03:10:48.000000Z\",\n                \"updated_at\": \"2025-07-30T03:39:17.000000Z\"\n            },\n            \"position\": {\n                \"id\": 25,\n                \"code\": \"TQ\",\n                \"name\": \"Trequartista\",\n                \"desc\": \"Playmaker bebas di depan\",\n                \"created_at\": null,\n                \"updated_at\": null\n            }\n        }\n    ],\n    \"meta\": {\n        \"pagination\": {\n            \"current_page\": 1,\n            \"last_page\": 1,\n            \"per_page\": 15,\n            \"total\": 1,\n            \"from\": 1,\n            \"to\": 1\n        },\n        \"filters\": {\n            \"search\": null,\n            \"team_id\": null,\n            \"position_id\": null,\n            \"squad_number\": null\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "detail",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer YOUR_JWT_TOKEN"
+							}
+						],
+						"url": {
+							"raw": "{{server}}/api/players/:id",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"api",
+								"players",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "detail",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer YOUR_JWT_TOKEN"
+									}
+								],
+								"url": {
+									"raw": "{{server}}/api/players/:id",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"players",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 30 Jul 2025 04:36:25 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": {\n        \"status\": 200,\n        \"message\": \"Player retrieved successfully\"\n    },\n    \"data\": {\n        \"id\": 1,\n        \"name\": \"Lionel Messi\",\n        \"team_id\": 2,\n        \"squad_number\": 11,\n        \"height\": 170,\n        \"weight\": 75,\n        \"position_id\": 25,\n        \"created_at\": \"2025-07-30T04:34:40.000000Z\",\n        \"updated_at\": \"2025-07-30T04:35:42.000000Z\",\n        \"team\": {\n            \"id\": 2,\n            \"name\": \"Persib Bandung FC\",\n            \"logo\": \"http://localhost:8000/api/image/2_1753844830_V4m4Rc83uM.png\",\n            \"established_year\": 1933,\n            \"address\": \"Jl. Soekarno-Hatta No. 402, Bandung\",\n            \"city\": \"32.73\",\n            \"created_at\": \"2025-07-30T03:10:48.000000Z\",\n            \"updated_at\": \"2025-07-30T03:39:17.000000Z\"\n        },\n        \"position\": {\n            \"id\": 25,\n            \"code\": \"TQ\",\n            \"name\": \"Trequartista\",\n            \"desc\": \"Playmaker bebas di depan\",\n            \"created_at\": null,\n            \"updated_at\": null\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "store",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer YOUR_JWT_TOKEN"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Lionel Messi\",\n    \"team_id\": 2,\n    \"squad_number\": 10,\n    \"height\": 170,\n    \"weight\": 72,\n    \"position_id\": 25\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/api/players",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"api",
+								"players"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "store",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer YOUR_JWT_TOKEN"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Lionel Messi\",\n    \"team_id\": 2,\n    \"squad_number\": 10,\n    \"height\": 170,\n    \"weight\": 72,\n    \"position_id\": 25\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{server}}/api/players",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"players"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 30 Jul 2025 04:34:40 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": {\n        \"status\": 201,\n        \"message\": \"Player created successfully\"\n    },\n    \"data\": {\n        \"name\": \"Lionel Messi\",\n        \"team_id\": 2,\n        \"squad_number\": 10,\n        \"height\": 170,\n        \"weight\": 72,\n        \"position_id\": 25,\n        \"updated_at\": \"2025-07-30T04:34:40.000000Z\",\n        \"created_at\": \"2025-07-30T04:34:40.000000Z\",\n        \"id\": 1,\n        \"team\": {\n            \"id\": 2,\n            \"name\": \"Persib Bandung FC\",\n            \"logo\": \"http://localhost:8000/api/image/2_1753844830_V4m4Rc83uM.png\",\n            \"established_year\": 1933,\n            \"address\": \"Jl. Soekarno-Hatta No. 402, Bandung\",\n            \"city\": \"32.73\",\n            \"created_at\": \"2025-07-30T03:10:48.000000Z\",\n            \"updated_at\": \"2025-07-30T03:39:17.000000Z\"\n        },\n        \"position\": {\n            \"id\": 25,\n            \"code\": \"TQ\",\n            \"name\": \"Trequartista\",\n            \"desc\": \"Playmaker bebas di depan\",\n            \"created_at\": null,\n            \"updated_at\": null\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer YOUR_JWT_TOKEN"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"team_id\": 2,\n    \"squad_number\": 11,\n    \"weight\": 75\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/api/players/:id",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"api",
+								"players",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "update",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer YOUR_JWT_TOKEN"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"team_id\": 2,\n    \"squad_number\": 11,\n    \"weight\": 75\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{server}}/api/players/:id",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"players",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 30 Jul 2025 04:35:42 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": {\n        \"status\": 200,\n        \"message\": \"Player updated successfully\"\n    },\n    \"data\": {\n        \"id\": 1,\n        \"name\": \"Lionel Messi\",\n        \"team_id\": 2,\n        \"squad_number\": 11,\n        \"height\": 170,\n        \"weight\": 75,\n        \"position_id\": 25,\n        \"created_at\": \"2025-07-30T04:34:40.000000Z\",\n        \"updated_at\": \"2025-07-30T04:35:42.000000Z\",\n        \"team\": {\n            \"id\": 2,\n            \"name\": \"Persib Bandung FC\",\n            \"logo\": \"http://localhost:8000/api/image/2_1753844830_V4m4Rc83uM.png\",\n            \"established_year\": 1933,\n            \"address\": \"Jl. Soekarno-Hatta No. 402, Bandung\",\n            \"city\": \"32.73\",\n            \"created_at\": \"2025-07-30T03:10:48.000000Z\",\n            \"updated_at\": \"2025-07-30T03:39:17.000000Z\"\n        },\n        \"position\": {\n            \"id\": 25,\n            \"code\": \"TQ\",\n            \"name\": \"Trequartista\",\n            \"desc\": \"Playmaker bebas di depan\",\n            \"created_at\": null,\n            \"updated_at\": null\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer YOUR_JWT_TOKEN"
+							}
+						],
+						"url": {
+							"raw": "{{server}}/api/players/:id",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"api",
+								"players",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "delete",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer YOUR_JWT_TOKEN"
+									}
+								],
+								"url": {
+									"raw": "{{server}}/api/players/:id",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"players",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 30 Jul 2025 04:38:00 GMT"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "match",
+			"item": [
+				{
+					"name": "activities",
+					"item": [
+						{
+							"name": "activity-types",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer YOUR_JWT_TOKEN"
+									}
+								],
+								"url": {
+									"raw": "{{server}}/api/matches/activity-types",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"matches",
+										"activity-types"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "activity-types",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer YOUR_JWT_TOKEN"
+											}
+										],
+										"url": {
+											"raw": "{{server}}/api/matches/activity-types",
+											"host": [
+												"{{server}}"
+											],
+											"path": [
+												"api",
+												"matches",
+												"activity-types"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": null,
+									"header": [
+										{
+											"key": "Host",
+											"value": "localhost:8000"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.2.12"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 30 Jul 2025 06:57:50 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"code\": {\n        \"status\": 200,\n        \"message\": \"Activity types retrieved successfully\"\n    },\n    \"data\": {\n        \"match_start\": \"Pertandingan dimulai\",\n        \"match_end\": \"Pertandingan berakhir\",\n        \"half_time\": \"Istirahat babak pertama\",\n        \"second_half\": \"Babak kedua dimulai\",\n        \"extra_time_start\": \"Perpanjangan waktu dimulai\",\n        \"extra_time_end\": \"Perpanjangan waktu berakhir\",\n        \"penalty_shootout_start\": \"Adu penalti dimulai\",\n        \"penalty_shootout_end\": \"Adu penalti berakhir\",\n        \"goal\": \"Gol\",\n        \"own_goal\": \"Gol bunuh diri\",\n        \"penalty_goal\": \"Gol dari penalti\",\n        \"free_kick_goal\": \"Gol dari tendangan bebas\",\n        \"header_goal\": \"Gol sundulan\",\n        \"volley_goal\": \"Gol voli\",\n        \"long_range_goal\": \"Gol jarak jauh\",\n        \"assist\": \"Assist\",\n        \"yellow_card\": \"Kartu kuning\",\n        \"red_card\": \"Kartu merah\",\n        \"second_yellow\": \"Kartu kuning kedua (merah)\",\n        \"yellow_red_card\": \"Kartu kuning-merah\",\n        \"foul\": \"Pelanggaran\",\n        \"dangerous_play\": \"Permainan berbahaya\",\n        \"handball\": \"Handball\",\n        \"offside\": \"Offside\",\n        \"diving\": \"Simulasi/diving\",\n        \"violent_conduct\": \"Kekerasan\",\n        \"unsporting_behavior\": \"Perilaku tidak sportif\",\n        \"dissent\": \"Protes kepada wasit\",\n        \"time_wasting\": \"Membuang waktu\",\n        \"substitution_in\": \"Pemain masuk\",\n        \"substitution_out\": \"Pemain keluar\",\n        \"tactical_substitution\": \"Substitusi taktis\",\n        \"injury_substitution\": \"Substitusi cedera\",\n        \"injury\": \"Cedera\",\n        \"medical_attention\": \"Pertolongan medis\",\n        \"concussion\": \"Gegar otak\",\n        \"blood_injury\": \"Cedera berdarah\",\n        \"corner\": \"Tendangan sudut\",\n        \"free_kick\": \"Tendangan bebas\",\n        \"penalty_awarded\": \"Penalti diberikan\",\n        \"penalty_missed\": \"Penalti meleset\",\n        \"penalty_saved\": \"Penalti diselamatkan\",\n        \"throw_in\": \"Lemparan ke dalam\",\n        \"goal_kick\": \"Tendangan gawang\",\n        \"save\": \"Penyelamatan\",\n        \"catch\": \"Menangkap bola\",\n        \"punch\": \"Meninju bola\",\n        \"goalkeeper_foul\": \"Pelanggaran kiper\",\n        \"goalkeeper_handball\": \"Handball kiper\",\n        \"ball_out\": \"Bola keluar\",\n        \"ball_in_play\": \"Bola dalam permainan\",\n        \"referee_decision\": \"Keputusan wasit\",\n        \"var_check\": \"Pengecekan VAR\",\n        \"var_decision\": \"Keputusan VAR\",\n        \"goal_disallowed\": \"Gol dibatalkan\",\n        \"goal_allowed\": \"Gol disahkan\"\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "list",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer YOUR_JWT_TOKEN"
+									}
+								],
+								"url": {
+									"raw": "{{server}}/api/matches/:matchID/activities",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"matches",
+										":matchID",
+										"activities"
+									],
+									"variable": [
+										{
+											"key": "matchID",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "list",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer YOUR_JWT_TOKEN"
+											}
+										],
+										"url": {
+											"raw": "{{server}}/api/matches/:matchID/activities",
+											"host": [
+												"{{server}}"
+											],
+											"path": [
+												"api",
+												"matches",
+												":matchID",
+												"activities"
+											],
+											"variable": [
+												{
+													"key": "matchID",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Host",
+											"value": "localhost:8000"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.2.12"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 30 Jul 2025 07:12:21 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": "{\n    \"code\": {\n        \"status\": 200,\n        \"message\": \"Match activities retrieved successfully\"\n    },\n    \"data\": [\n        {\n            \"id\": 4,\n            \"match_id\": 1,\n            \"team_id\": null,\n            \"player_id\": null,\n            \"activity\": \"match_end\",\n            \"time_activity\": \"01:30:00\",\n            \"detail\": null,\n            \"created_at\": \"2025-07-30T07:12:07.000000Z\",\n            \"updated_at\": \"2025-07-30T07:12:07.000000Z\",\n            \"match\": {\n                \"id\": 1,\n                \"venue\": \"Stadion Gelora Bung Karno\",\n                \"match_datetime\": \"2025-07-30T19:30:00.000000Z\",\n                \"home_team_id\": 2,\n                \"away_team_id\": 3,\n                \"match_metadata\": {\n                    \"status\": \"home-win\",\n                    \"scores_away\": 0,\n                    \"scores_home\": 1,\n                    \"winner_team\": 2\n                },\n                \"created_at\": \"2025-07-30T06:14:19.000000Z\",\n                \"updated_at\": \"2025-07-30T07:12:07.000000Z\"\n            },\n            \"team\": null,\n            \"player\": null\n        },\n        {\n            \"id\": 3,\n            \"match_id\": 1,\n            \"team_id\": 2,\n            \"player_id\": 1,\n            \"activity\": \"goal\",\n            \"time_activity\": \"00:15:30\",\n            \"detail\": \"Gol spektakuler dari tendangan bebas\",\n            \"created_at\": \"2025-07-30T07:10:39.000000Z\",\n            \"updated_at\": \"2025-07-30T07:10:39.000000Z\",\n            \"match\": {\n                \"id\": 1,\n                \"venue\": \"Stadion Gelora Bung Karno\",\n                \"match_datetime\": \"2025-07-30T19:30:00.000000Z\",\n                \"home_team_id\": 2,\n                \"away_team_id\": 3,\n                \"match_metadata\": {\n                    \"status\": \"home-win\",\n                    \"scores_away\": 0,\n                    \"scores_home\": 1,\n                    \"winner_team\": 2\n                },\n                \"created_at\": \"2025-07-30T06:14:19.000000Z\",\n                \"updated_at\": \"2025-07-30T07:12:07.000000Z\"\n            },\n            \"team\": {\n                \"id\": 2,\n                \"name\": \"Persib Bandung FC\",\n                \"logo\": \"http://localhost:8000/api/image/2_1753844830_V4m4Rc83uM.png\",\n                \"established_year\": 1933,\n                \"address\": \"Jl. Soekarno-Hatta No. 402, Bandung\",\n                \"city\": \"32.73\",\n                \"created_at\": \"2025-07-30T03:10:48.000000Z\",\n                \"updated_at\": \"2025-07-30T03:39:17.000000Z\"\n            },\n            \"player\": {\n                \"id\": 1,\n                \"name\": \"Lionel Messi\",\n                \"team_id\": 2,\n                \"squad_number\": 11,\n                \"height\": 170,\n                \"weight\": 72,\n                \"position_id\": 25,\n                \"created_at\": \"2025-07-30T04:43:10.000000Z\",\n                \"updated_at\": \"2025-07-30T04:43:10.000000Z\"\n            }\n        },\n        {\n            \"id\": 1,\n            \"match_id\": 1,\n            \"team_id\": null,\n            \"player_id\": null,\n            \"activity\": \"match_start\",\n            \"time_activity\": \"00:00:00\",\n            \"detail\": null,\n            \"created_at\": \"2025-07-30T07:02:08.000000Z\",\n            \"updated_at\": \"2025-07-30T07:02:08.000000Z\",\n            \"match\": {\n                \"id\": 1,\n                \"venue\": \"Stadion Gelora Bung Karno\",\n                \"match_datetime\": \"2025-07-30T19:30:00.000000Z\",\n                \"home_team_id\": 2,\n                \"away_team_id\": 3,\n                \"match_metadata\": {\n                    \"status\": \"home-win\",\n                    \"scores_away\": 0,\n                    \"scores_home\": 1,\n                    \"winner_team\": 2\n                },\n                \"created_at\": \"2025-07-30T06:14:19.000000Z\",\n                \"updated_at\": \"2025-07-30T07:12:07.000000Z\"\n            },\n            \"team\": null,\n            \"player\": null\n        }\n    ],\n    \"meta\": {\n        \"pagination\": {\n            \"current_page\": 1,\n            \"last_page\": 1,\n            \"per_page\": 15,\n            \"total\": 3,\n            \"from\": 1,\n            \"to\": 3\n        },\n        \"filters\": {\n            \"search\": null,\n            \"match_id\": \"1\",\n            \"team_id\": null,\n            \"player_id\": null,\n            \"activity\": null,\n            \"start_time\": null,\n            \"end_time\": null,\n            \"type\": null\n        }\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "detail",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer YOUR_JWT_TOKEN"
+									}
+								],
+								"url": {
+									"raw": "{{server}}/api/matches/:matchID/activities/:id",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"matches",
+										":matchID",
+										"activities",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "matchID",
+											"value": "1"
+										},
+										{
+											"key": "id",
+											"value": "3"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "detail",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer YOUR_JWT_TOKEN"
+											}
+										],
+										"url": {
+											"raw": "{{server}}/api/matches/:matchID/activities/:id",
+											"host": [
+												"{{server}}"
+											],
+											"path": [
+												"api",
+												"matches",
+												":matchID",
+												"activities",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "matchID",
+													"value": "1"
+												},
+												{
+													"key": "id",
+													"value": "3"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": null,
+									"header": [
+										{
+											"key": "Host",
+											"value": "localhost:8000"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.2.12"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 30 Jul 2025 07:14:14 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"code\": {\n        \"status\": 200,\n        \"message\": \"Match activity retrieved successfully\"\n    },\n    \"data\": {\n        \"id\": 3,\n        \"match_id\": 1,\n        \"team_id\": 2,\n        \"player_id\": 1,\n        \"activity\": \"goal\",\n        \"time_activity\": \"00:15:30\",\n        \"detail\": \"Gol spektakuler dari tendangan bebas\",\n        \"created_at\": \"2025-07-30T07:10:39.000000Z\",\n        \"updated_at\": \"2025-07-30T07:10:39.000000Z\",\n        \"match\": {\n            \"id\": 1,\n            \"venue\": \"Stadion Gelora Bung Karno\",\n            \"match_datetime\": \"2025-07-30T19:30:00.000000Z\",\n            \"home_team_id\": 2,\n            \"away_team_id\": 3,\n            \"match_metadata\": {\n                \"status\": \"home-win\",\n                \"scores_away\": 0,\n                \"scores_home\": 1,\n                \"winner_team\": 2\n            },\n            \"created_at\": \"2025-07-30T06:14:19.000000Z\",\n            \"updated_at\": \"2025-07-30T07:12:07.000000Z\"\n        },\n        \"team\": {\n            \"id\": 2,\n            \"name\": \"Persib Bandung FC\",\n            \"logo\": \"http://localhost:8000/api/image/2_1753844830_V4m4Rc83uM.png\",\n            \"established_year\": 1933,\n            \"address\": \"Jl. Soekarno-Hatta No. 402, Bandung\",\n            \"city\": \"32.73\",\n            \"created_at\": \"2025-07-30T03:10:48.000000Z\",\n            \"updated_at\": \"2025-07-30T03:39:17.000000Z\"\n        },\n        \"player\": {\n            \"id\": 1,\n            \"name\": \"Lionel Messi\",\n            \"team_id\": 2,\n            \"squad_number\": 11,\n            \"height\": 170,\n            \"weight\": 72,\n            \"position_id\": 25,\n            \"created_at\": \"2025-07-30T04:43:10.000000Z\",\n            \"updated_at\": \"2025-07-30T04:43:10.000000Z\"\n        }\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "match-start",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer YOUR_JWT_TOKEN"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"activity\": \"match_start\",\n    \"time_activity\": \"00:00:00\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{server}}/api/matches/:matchID/activities",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"matches",
+										":matchID",
+										"activities"
+									],
+									"variable": [
+										{
+											"key": "matchID",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "match-start",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer YOUR_JWT_TOKEN"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"activity\": \"match_start\",\n    \"time_activity\": \"00:00:00\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{server}}/api/matches/1/activities",
+											"host": [
+												"{{server}}"
+											],
+											"path": [
+												"api",
+												"matches",
+												"1",
+												"activities"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": null,
+									"header": [
+										{
+											"key": "Host",
+											"value": "localhost:8000"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.2.12"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 30 Jul 2025 07:02:08 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"code\": {\n        \"status\": 201,\n        \"message\": \"Match activity created successfully\"\n    },\n    \"data\": {\n        \"activity\": \"match_start\",\n        \"time_activity\": \"00:00:00\",\n        \"match_id\": \"1\",\n        \"updated_at\": \"2025-07-30T07:02:08.000000Z\",\n        \"created_at\": \"2025-07-30T07:02:08.000000Z\",\n        \"id\": 1,\n        \"match\": {\n            \"id\": 1,\n            \"venue\": \"Stadion Gelora Bung Karno\",\n            \"match_datetime\": \"2025-07-30T19:30:00.000000Z\",\n            \"home_team_id\": 2,\n            \"away_team_id\": 3,\n            \"match_metadata\": null,\n            \"created_at\": \"2025-07-30T06:14:19.000000Z\",\n            \"updated_at\": \"2025-07-30T06:26:19.000000Z\"\n        },\n        \"team\": null,\n        \"player\": null\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "match-end",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer YOUR_JWT_TOKEN"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"activity\": \"match_end\",\n    \"time_activity\": \"01:30:00\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{server}}/api/matches/:matchID/activities",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"matches",
+										":matchID",
+										"activities"
+									],
+									"variable": [
+										{
+											"key": "matchID",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "match-end",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer YOUR_JWT_TOKEN"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"activity\": \"match_end\",\n    \"time_activity\": \"01:30:00\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{server}}/api/matches/1/activities",
+											"host": [
+												"{{server}}"
+											],
+											"path": [
+												"api",
+												"matches",
+												"1",
+												"activities"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": null,
+									"header": [
+										{
+											"key": "Host",
+											"value": "localhost:8000"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.2.12"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 30 Jul 2025 07:02:20 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"code\": {\n        \"status\": 201,\n        \"message\": \"Match activity created successfully\"\n    },\n    \"data\": {\n        \"activity\": \"match_end\",\n        \"time_activity\": \"01:30:00\",\n        \"match_id\": \"1\",\n        \"updated_at\": \"2025-07-30T07:02:20.000000Z\",\n        \"created_at\": \"2025-07-30T07:02:20.000000Z\",\n        \"id\": 2,\n        \"match\": {\n            \"id\": 1,\n            \"venue\": \"Stadion Gelora Bung Karno\",\n            \"match_datetime\": \"2025-07-30T19:30:00.000000Z\",\n            \"home_team_id\": 2,\n            \"away_team_id\": 3,\n            \"match_metadata\": {\n                \"status\": \"draw\",\n                \"scores_away\": 0,\n                \"scores_home\": 0\n            },\n            \"created_at\": \"2025-07-30T06:14:19.000000Z\",\n            \"updated_at\": \"2025-07-30T07:02:20.000000Z\"\n        },\n        \"team\": null,\n        \"player\": null\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "add-activity",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer YOUR_JWT_TOKEN"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"team_id\": 2,\n    \"player_id\": 1,\n    \"activity\": \"goal\",\n    \"time_activity\": \"00:15:30\",\n    \"detail\": \"Gol spektakuler dari tendangan bebas\"\n  }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{server}}/api/matches/:matchID/activities",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"matches",
+										":matchID",
+										"activities"
+									],
+									"variable": [
+										{
+											"key": "matchID",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "add-activity",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer YOUR_JWT_TOKEN"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"team_id\": 2,\n    \"player_id\": 1,\n    \"activity\": \"goal\",\n    \"time_activity\": \"00:15:30\",\n    \"detail\": \"Gol spektakuler dari tendangan bebas\"\n  }",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{server}}/api/matches/:matchID/activities",
+											"host": [
+												"{{server}}"
+											],
+											"path": [
+												"api",
+												"matches",
+												":matchID",
+												"activities"
+											],
+											"variable": [
+												{
+													"key": "matchID",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": null,
+									"header": [
+										{
+											"key": "Host",
+											"value": "localhost:8000"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.2.12"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 30 Jul 2025 07:10:39 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"code\": {\n        \"status\": 201,\n        \"message\": \"Match activity created successfully\"\n    },\n    \"data\": {\n        \"team_id\": 2,\n        \"player_id\": 1,\n        \"activity\": \"goal\",\n        \"time_activity\": \"00:15:30\",\n        \"detail\": \"Gol spektakuler dari tendangan bebas\",\n        \"match_id\": \"1\",\n        \"updated_at\": \"2025-07-30T07:10:39.000000Z\",\n        \"created_at\": \"2025-07-30T07:10:39.000000Z\",\n        \"id\": 3,\n        \"match\": {\n            \"id\": 1,\n            \"venue\": \"Stadion Gelora Bung Karno\",\n            \"match_datetime\": \"2025-07-30T19:30:00.000000Z\",\n            \"home_team_id\": 2,\n            \"away_team_id\": 3,\n            \"match_metadata\": {\n                \"status\": \"draw\",\n                \"scores_away\": 0,\n                \"scores_home\": 0\n            },\n            \"created_at\": \"2025-07-30T06:14:19.000000Z\",\n            \"updated_at\": \"2025-07-30T07:02:20.000000Z\"\n        },\n        \"team\": {\n            \"id\": 2,\n            \"name\": \"Persib Bandung FC\",\n            \"logo\": \"http://localhost:8000/api/image/2_1753844830_V4m4Rc83uM.png\",\n            \"established_year\": 1933,\n            \"address\": \"Jl. Soekarno-Hatta No. 402, Bandung\",\n            \"city\": \"32.73\",\n            \"created_at\": \"2025-07-30T03:10:48.000000Z\",\n            \"updated_at\": \"2025-07-30T03:39:17.000000Z\"\n        },\n        \"player\": {\n            \"id\": 1,\n            \"name\": \"Lionel Messi\",\n            \"team_id\": 2,\n            \"squad_number\": 11,\n            \"height\": 170,\n            \"weight\": 72,\n            \"position_id\": 25,\n            \"created_at\": \"2025-07-30T04:43:10.000000Z\",\n            \"updated_at\": \"2025-07-30T04:43:10.000000Z\"\n        }\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "delete",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer YOUR_JWT_TOKEN"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8000/api/matches/:matchID/activities/:id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"matches",
+										":matchID",
+										"activities",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "matchID",
+											"value": "1"
+										},
+										{
+											"key": "id",
+											"value": "3"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "delete",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer YOUR_JWT_TOKEN"
+											}
+										],
+										"url": {
+											"raw": "http://localhost:8000/api/matches/:matchID/activities/:id",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8000",
+											"path": [
+												"api",
+												"matches",
+												":matchID",
+												"activities",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "matchID",
+													"value": "1"
+												},
+												{
+													"key": "id",
+													"value": "3"
+												}
+											]
+										}
+									},
+									"status": "No Content",
+									"code": 204,
+									"_postman_previewlanguage": null,
+									"header": [
+										{
+											"key": "Host",
+											"value": "localhost:8000"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.2.12"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 30 Jul 2025 07:15:35 GMT"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										}
+									],
+									"cookie": [],
+									"body": null
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "report",
+					"item": [
+						{
+							"name": "timeline",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer YOUR_JWT_TOKEN"
+									}
+								],
+								"url": {
+									"raw": "{{server}}/api/matches/:matchID/timeline",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"matches",
+										":matchID",
+										"timeline"
+									],
+									"variable": [
+										{
+											"key": "matchID",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "timeline",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer YOUR_JWT_TOKEN"
+											}
+										],
+										"url": {
+											"raw": "{{server}}/api/matches/:matchID/timeline",
+											"host": [
+												"{{server}}"
+											],
+											"path": [
+												"api",
+												"matches",
+												":matchID",
+												"timeline"
+											],
+											"variable": [
+												{
+													"key": "matchID",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Host",
+											"value": "localhost:8000"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.2.12"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 30 Jul 2025 07:57:02 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": "{\n    \"code\": {\n        \"status\": 200,\n        \"message\": \"Match timeline retrieved successfully\"\n    },\n    \"data\": [\n        {\n            \"id\": 7,\n            \"match_id\": 1,\n            \"team_id\": null,\n            \"player_id\": null,\n            \"activity\": \"match_end\",\n            \"time_activity\": \"01:30:00\",\n            \"detail\": null,\n            \"created_at\": \"2025-07-30T07:22:26.000000Z\",\n            \"updated_at\": \"2025-07-30T07:22:26.000000Z\",\n            \"team\": null,\n            \"player\": null\n        },\n        {\n            \"id\": 5,\n            \"match_id\": 1,\n            \"team_id\": 2,\n            \"player_id\": 1,\n            \"activity\": \"goal\",\n            \"time_activity\": \"00:25:30\",\n            \"detail\": \"Gol spektakuler dari tendangan bebas\",\n            \"created_at\": \"2025-07-30T07:22:12.000000Z\",\n            \"updated_at\": \"2025-07-30T07:22:12.000000Z\",\n            \"team\": {\n                \"id\": 2,\n                \"name\": \"Persib Bandung FC\",\n                \"logo\": \"http://localhost:8000/api/image/2_1753844830_V4m4Rc83uM.png\",\n                \"established_year\": 1933,\n                \"address\": \"Jl. Soekarno-Hatta No. 402, Bandung\",\n                \"city\": \"32.73\",\n                \"created_at\": \"2025-07-30T03:10:48.000000Z\",\n                \"updated_at\": \"2025-07-30T03:39:17.000000Z\"\n            },\n            \"player\": {\n                \"id\": 1,\n                \"name\": \"Lionel Messi\",\n                \"team_id\": 2,\n                \"squad_number\": 11,\n                \"height\": 170,\n                \"weight\": 72,\n                \"position_id\": 25,\n                \"created_at\": \"2025-07-30T04:43:10.000000Z\",\n                \"updated_at\": \"2025-07-30T04:43:10.000000Z\"\n            }\n        },\n        {\n            \"id\": 6,\n            \"match_id\": 1,\n            \"team_id\": 2,\n            \"player_id\": 1,\n            \"activity\": \"own_goal\",\n            \"time_activity\": \"00:21:30\",\n            \"detail\": \"Gol spektakuler dari tendangan bebas\",\n            \"created_at\": \"2025-07-30T07:22:21.000000Z\",\n            \"updated_at\": \"2025-07-30T07:22:21.000000Z\",\n            \"team\": {\n                \"id\": 2,\n                \"name\": \"Persib Bandung FC\",\n                \"logo\": \"http://localhost:8000/api/image/2_1753844830_V4m4Rc83uM.png\",\n                \"established_year\": 1933,\n                \"address\": \"Jl. Soekarno-Hatta No. 402, Bandung\",\n                \"city\": \"32.73\",\n                \"created_at\": \"2025-07-30T03:10:48.000000Z\",\n                \"updated_at\": \"2025-07-30T03:39:17.000000Z\"\n            },\n            \"player\": {\n                \"id\": 1,\n                \"name\": \"Lionel Messi\",\n                \"team_id\": 2,\n                \"squad_number\": 11,\n                \"height\": 170,\n                \"weight\": 72,\n                \"position_id\": 25,\n                \"created_at\": \"2025-07-30T04:43:10.000000Z\",\n                \"updated_at\": \"2025-07-30T04:43:10.000000Z\"\n            }\n        },\n        {\n            \"id\": 3,\n            \"match_id\": 1,\n            \"team_id\": 2,\n            \"player_id\": 1,\n            \"activity\": \"goal\",\n            \"time_activity\": \"00:15:30\",\n            \"detail\": \"Gol spektakuler dari tendangan bebas\",\n            \"created_at\": \"2025-07-30T07:10:39.000000Z\",\n            \"updated_at\": \"2025-07-30T07:15:35.000000Z\",\n            \"team\": {\n                \"id\": 2,\n                \"name\": \"Persib Bandung FC\",\n                \"logo\": \"http://localhost:8000/api/image/2_1753844830_V4m4Rc83uM.png\",\n                \"established_year\": 1933,\n                \"address\": \"Jl. Soekarno-Hatta No. 402, Bandung\",\n                \"city\": \"32.73\",\n                \"created_at\": \"2025-07-30T03:10:48.000000Z\",\n                \"updated_at\": \"2025-07-30T03:39:17.000000Z\"\n            },\n            \"player\": {\n                \"id\": 1,\n                \"name\": \"Lionel Messi\",\n                \"team_id\": 2,\n                \"squad_number\": 11,\n                \"height\": 170,\n                \"weight\": 72,\n                \"position_id\": 25,\n                \"created_at\": \"2025-07-30T04:43:10.000000Z\",\n                \"updated_at\": \"2025-07-30T04:43:10.000000Z\"\n            }\n        },\n        {\n            \"id\": 1,\n            \"match_id\": 1,\n            \"team_id\": null,\n            \"player_id\": null,\n            \"activity\": \"match_start\",\n            \"time_activity\": \"00:00:00\",\n            \"detail\": null,\n            \"created_at\": \"2025-07-30T07:02:08.000000Z\",\n            \"updated_at\": \"2025-07-30T07:02:08.000000Z\",\n            \"team\": null,\n            \"player\": null\n        }\n    ]\n}"
+								}
+							]
+						},
+						{
+							"name": "stats",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer YOUR_JWT_TOKEN"
+									}
+								],
+								"url": {
+									"raw": "{{server}}/api/matches/:matchID/stats",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"matches",
+										":matchID",
+										"stats"
+									],
+									"variable": [
+										{
+											"key": "matchID",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "stats",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer YOUR_JWT_TOKEN"
+											}
+										],
+										"url": {
+											"raw": "{{server}}/api/matches/:matchID/stats",
+											"host": [
+												"{{server}}"
+											],
+											"path": [
+												"api",
+												"matches",
+												":matchID",
+												"stats"
+											],
+											"variable": [
+												{
+													"key": "matchID",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Host",
+											"value": "localhost:8000"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.2.12"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 30 Jul 2025 07:57:12 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										}
+									],
+									"cookie": [
+										{
+											"expires": "Invalid Date"
+										}
+									],
+									"body": "{\n    \"code\": {\n        \"status\": 200,\n        \"message\": \"Match statistics retrieved successfully\"\n    },\n    \"data\": {\n        \"goals\": 3,\n        \"yellow_cards\": 0,\n        \"red_cards\": 0,\n        \"substitutions\": 0,\n        \"corners\": 0,\n        \"penalties\": 0,\n        \"fouls\": 0\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "match-report",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer YOUR_JWT_TOKEN"
+									}
+								],
+								"url": {
+									"raw": "{{server}}/api/matches/:matchID/match-report",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"matches",
+										":matchID",
+										"match-report"
+									],
+									"variable": [
+										{
+											"key": "matchID",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "match-report",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer YOUR_JWT_TOKEN"
+											}
+										],
+										"url": {
+											"raw": "{{server}}/api/matches/:matchID/match-report",
+											"host": [
+												"{{server}}"
+											],
+											"path": [
+												"api",
+												"matches",
+												":matchID",
+												"match-report"
+											],
+											"variable": [
+												{
+													"key": "matchID",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Host",
+											"value": "localhost:8000"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.2.12"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 30 Jul 2025 08:02:10 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"description": "",
+											"type": "text"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"code\": {\n        \"status\": 200,\n        \"message\": \"Match report retrieved successfully\"\n    },\n    \"data\": {\n        \"match_info\": {\n            \"id\": 1,\n            \"venue\": \"Stadion Gelora Bung Karno\",\n            \"match_datetime\": \"2025-07-30T19:30:00.000000Z\",\n            \"home_team\": {\n                \"id\": 2,\n                \"name\": \"Persib Bandung FC\"\n            },\n            \"away_team\": {\n                \"id\": 3,\n                \"name\": \"Persib Bandung 2\"\n            }\n        },\n        \"match_result\": {\n            \"final_score\": \"2 - 1\",\n            \"home_score\": 2,\n            \"away_score\": 1,\n            \"result\": \"home-win\",\n            \"winner_team\": 2\n        },\n        \"team_performance\": {\n            \"home_team\": {\n                \"wins\": 1,\n                \"losses\": 0,\n                \"draws\": 0,\n                \"total_matches\": 1,\n                \"regular_goals\": 2,\n                \"own_goals_conceded\": 1\n            },\n            \"away_team\": {\n                \"wins\": 0,\n                \"losses\": 1,\n                \"draws\": 0,\n                \"total_matches\": 1,\n                \"regular_goals\": 0,\n                \"own_goals_conceded\": 0\n            }\n        },\n        \"goal_timeline\": [\n            {\n                \"time\": \"00:15:30\",\n                \"player_id\": 1,\n                \"player_name\": \"Lionel Messi\",\n                \"team_id\": 2,\n                \"team_name\": \"Persib Bandung FC\",\n                \"activity\": \"goal\",\n                \"activity_description\": \"Gol\",\n                \"detail\": \"Gol spektakuler dari tendangan bebas\",\n                \"is_own_goal\": false,\n                \"own_goal_player\": null\n            },\n            {\n                \"time\": \"00:21:30\",\n                \"player_id\": 1,\n                \"player_name\": \"Lionel Messi\",\n                \"team_id\": 3,\n                \"team_name\": \"Persib Bandung 2\",\n                \"activity\": \"own_goal\",\n                \"activity_description\": \"Gol bunuh diri\",\n                \"detail\": \"Gol spektakuler dari tendangan bebas\",\n                \"is_own_goal\": true,\n                \"own_goal_player\": \"Lionel Messi\"\n            },\n            {\n                \"time\": \"00:25:30\",\n                \"player_id\": 1,\n                \"player_name\": \"Lionel Messi\",\n                \"team_id\": 2,\n                \"team_name\": \"Persib Bandung FC\",\n                \"activity\": \"goal\",\n                \"activity_description\": \"Gol\",\n                \"detail\": \"Gol spektakuler dari tendangan bebas\",\n                \"is_own_goal\": false,\n                \"own_goal_player\": null\n            }\n        ],\n        \"top_scorers\": [\n            {\n                \"player_id\": 1,\n                \"player_name\": \"Lionel Messi\",\n                \"team_id\": 2,\n                \"team_name\": \"Persib Bandung FC\",\n                \"goals\": 2\n            }\n        ],\n        \"match_metadata\": {\n            \"status\": \"home-win\",\n            \"scores_away\": 1,\n            \"scores_home\": 2,\n            \"winner_team\": 2\n        }\n    }\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "list",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{server}}/api/matches",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"api",
+								"matches"
+							],
+							"query": [
+								{
+									"key": "team_id",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "status",
+									"value": "upcoming",
+									"disabled": true
+								},
+								{
+									"key": "start_date",
+									"value": "2024-02-01",
+									"disabled": true
+								},
+								{
+									"key": "end_date",
+									"value": "2024-02-28",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "list",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{server}}/api/matches",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"matches"
+									],
+									"query": [
+										{
+											"key": "team_id",
+											"value": "1",
+											"disabled": true
+										},
+										{
+											"key": "status",
+											"value": "upcoming",
+											"disabled": true
+										},
+										{
+											"key": "start_date",
+											"value": "2024-02-01",
+											"disabled": true
+										},
+										{
+											"key": "end_date",
+											"value": "2024-02-28",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 30 Jul 2025 06:17:33 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": {\n        \"status\": 200,\n        \"message\": \"Matches retrieved successfully\"\n    },\n    \"data\": [\n        {\n            \"id\": 1,\n            \"venue\": \"Stadion Gelora Bung Karno\",\n            \"match_datetime\": \"2025-07-30T19:30:00.000000Z\",\n            \"home_team_id\": 2,\n            \"away_team_id\": 3,\n            \"match_metadata\": null,\n            \"created_at\": \"2025-07-30T06:14:19.000000Z\",\n            \"updated_at\": \"2025-07-30T06:14:19.000000Z\",\n            \"home_team\": {\n                \"id\": 2,\n                \"name\": \"Persib Bandung FC\",\n                \"logo\": \"http://localhost:8000/api/image/2_1753844830_V4m4Rc83uM.png\",\n                \"established_year\": 1933,\n                \"address\": \"Jl. Soekarno-Hatta No. 402, Bandung\",\n                \"city\": \"32.73\",\n                \"created_at\": \"2025-07-30T03:10:48.000000Z\",\n                \"updated_at\": \"2025-07-30T03:39:17.000000Z\"\n            },\n            \"away_team\": {\n                \"id\": 3,\n                \"name\": \"Persib Bandung 2\",\n                \"logo\": \"http://localhost:8000/api/image/2_1753844830_V4m4Rc83uM.png\",\n                \"established_year\": 1933,\n                \"address\": \"Jl. Soekarno-Hatta No. 402, Bandung\",\n                \"city\": \"32.73\",\n                \"created_at\": \"2025-07-30T06:12:22.000000Z\",\n                \"updated_at\": \"2025-07-30T06:12:22.000000Z\"\n            }\n        }\n    ],\n    \"meta\": {\n        \"pagination\": {\n            \"current_page\": 1,\n            \"last_page\": 1,\n            \"per_page\": 15,\n            \"total\": 1,\n            \"from\": 1,\n            \"to\": 1\n        },\n        \"filters\": {\n            \"search\": null,\n            \"home_team_id\": null,\n            \"away_team_id\": null,\n            \"team_id\": null,\n            \"start_date\": null,\n            \"end_date\": null,\n            \"status\": null\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "detail",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer YOUR_JWT_TOKEN"
+							}
+						],
+						"url": {
+							"raw": "{{server}}/api/matches/:id",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"api",
+								"matches",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "detail",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer YOUR_JWT_TOKEN"
+									}
+								],
+								"url": {
+									"raw": "{{server}}/api/matches/:id",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"matches",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 30 Jul 2025 07:12:40 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": {\n        \"status\": 200,\n        \"message\": \"Match retrieved successfully\"\n    },\n    \"data\": {\n        \"id\": 1,\n        \"venue\": \"Stadion Gelora Bung Karno\",\n        \"match_datetime\": \"2025-07-30T19:30:00.000000Z\",\n        \"home_team_id\": 2,\n        \"away_team_id\": 3,\n        \"match_metadata\": {\n            \"status\": \"home-win\",\n            \"scores_away\": 0,\n            \"scores_home\": 1,\n            \"winner_team\": 2\n        },\n        \"created_at\": \"2025-07-30T06:14:19.000000Z\",\n        \"updated_at\": \"2025-07-30T07:12:07.000000Z\",\n        \"home_team\": {\n            \"id\": 2,\n            \"name\": \"Persib Bandung FC\",\n            \"logo\": \"http://localhost:8000/api/image/2_1753844830_V4m4Rc83uM.png\",\n            \"established_year\": 1933,\n            \"address\": \"Jl. Soekarno-Hatta No. 402, Bandung\",\n            \"city\": \"32.73\",\n            \"created_at\": \"2025-07-30T03:10:48.000000Z\",\n            \"updated_at\": \"2025-07-30T03:39:17.000000Z\"\n        },\n        \"away_team\": {\n            \"id\": 3,\n            \"name\": \"Persib Bandung 2\",\n            \"logo\": \"http://localhost:8000/api/image/2_1753844830_V4m4Rc83uM.png\",\n            \"established_year\": 1933,\n            \"address\": \"Jl. Soekarno-Hatta No. 402, Bandung\",\n            \"city\": \"32.73\",\n            \"created_at\": \"2025-07-30T06:12:22.000000Z\",\n            \"updated_at\": \"2025-07-30T06:12:22.000000Z\"\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "store",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer YOUR_JWT_TOKEN"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"venue\": \"Stadion Gelora Bung Karno\",\n    \"match_datetime\": \"2025-07-30 19:30:00\",\n    \"home_team_id\": 2,\n    \"away_team_id\": 3\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/api/matches",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"api",
+								"matches"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "store",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer YOUR_JWT_TOKEN"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"venue\": \"Stadion Gelora Bung Karno\",\n    \"match_datetime\": \"2025-07-30 19:30:00\",\n    \"home_team_id\": 2,\n    \"away_team_id\": 3\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{server}}/api/matches",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"matches"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 30 Jul 2025 06:14:19 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": {\n        \"status\": 201,\n        \"message\": \"Match created successfully\"\n    },\n    \"data\": {\n        \"venue\": \"Stadion Gelora Bung Karno\",\n        \"match_datetime\": \"2025-07-30T19:30:00.000000Z\",\n        \"home_team_id\": 2,\n        \"away_team_id\": 3,\n        \"updated_at\": \"2025-07-30T06:14:19.000000Z\",\n        \"created_at\": \"2025-07-30T06:14:19.000000Z\",\n        \"id\": 1,\n        \"home_team\": {\n            \"id\": 2,\n            \"name\": \"Persib Bandung FC\",\n            \"logo\": \"http://localhost:8000/api/image/2_1753844830_V4m4Rc83uM.png\",\n            \"established_year\": 1933,\n            \"address\": \"Jl. Soekarno-Hatta No. 402, Bandung\",\n            \"city\": \"32.73\",\n            \"created_at\": \"2025-07-30T03:10:48.000000Z\",\n            \"updated_at\": \"2025-07-30T03:39:17.000000Z\"\n        },\n        \"away_team\": {\n            \"id\": 3,\n            \"name\": \"Persib Bandung 2\",\n            \"logo\": \"http://localhost:8000/api/image/2_1753844830_V4m4Rc83uM.png\",\n            \"established_year\": 1933,\n            \"address\": \"Jl. Soekarno-Hatta No. 402, Bandung\",\n            \"city\": \"32.73\",\n            \"created_at\": \"2025-07-30T06:12:22.000000Z\",\n            \"updated_at\": \"2025-07-30T06:12:22.000000Z\"\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer YOUR_JWT_TOKEN"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"home_team_id\": 2,\n    \"away_team_id\": 3,\n    \"match_datetime\": \"2025-07-30 19:30:00\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/api/matches/:id",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"api",
+								"matches",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "update",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer YOUR_JWT_TOKEN"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"home_team_id\": 2,\n    \"away_team_id\": 3,\n    \"match_datetime\": \"2025-07-30 19:30:00\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{server}}/api/matches/:id",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"matches",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 30 Jul 2025 06:15:49 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": {\n        \"status\": 200,\n        \"message\": \"Match updated successfully\"\n    },\n    \"data\": {\n        \"id\": 1,\n        \"venue\": \"Stadion Gelora Bung Karno\",\n        \"match_datetime\": \"2025-07-30T19:30:00.000000Z\",\n        \"home_team_id\": 2,\n        \"away_team_id\": 3,\n        \"match_metadata\": null,\n        \"created_at\": \"2025-07-30T06:14:19.000000Z\",\n        \"updated_at\": \"2025-07-30T06:14:19.000000Z\",\n        \"home_team\": {\n            \"id\": 2,\n            \"name\": \"Persib Bandung FC\",\n            \"logo\": \"http://localhost:8000/api/image/2_1753844830_V4m4Rc83uM.png\",\n            \"established_year\": 1933,\n            \"address\": \"Jl. Soekarno-Hatta No. 402, Bandung\",\n            \"city\": \"32.73\",\n            \"created_at\": \"2025-07-30T03:10:48.000000Z\",\n            \"updated_at\": \"2025-07-30T03:39:17.000000Z\"\n        },\n        \"away_team\": {\n            \"id\": 3,\n            \"name\": \"Persib Bandung 2\",\n            \"logo\": \"http://localhost:8000/api/image/2_1753844830_V4m4Rc83uM.png\",\n            \"established_year\": 1933,\n            \"address\": \"Jl. Soekarno-Hatta No. 402, Bandung\",\n            \"city\": \"32.73\",\n            \"created_at\": \"2025-07-30T06:12:22.000000Z\",\n            \"updated_at\": \"2025-07-30T06:12:22.000000Z\"\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer YOUR_JWT_TOKEN"
+							}
+						],
+						"url": {
+							"raw": "{{server}}/api/matches/:id",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"api",
+								"matches",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "delete",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer YOUR_JWT_TOKEN"
+									}
+								],
+								"url": {
+									"raw": "{{server}}/api/matches/:id",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"matches",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 30 Jul 2025 06:26:19 GMT"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{access_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "server",
+			"value": "localhost:8000",
+			"type": "string"
+		},
+		{
+			"key": "access_token",
+			"value": ""
+		}
+	]
+}

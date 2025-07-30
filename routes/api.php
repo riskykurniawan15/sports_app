@@ -47,8 +47,9 @@ Route::controller(FileUploadController::class)->group(function () {
 // Protected routes (authentication required)
 Route::middleware('auth:api')->group(function () {
     Route::controller(AuthController::class)->group(function () {
-        Route::post('logout', 'logout');
         Route::get('user-profile', 'userProfile');
+        Route::put('user-profile', 'updateProfile');
+        Route::put('user-password', 'updatePassword');
     });
     
     // File upload routes (protected)

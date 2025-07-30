@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
+
 class AuthController extends ApiController
 {
     public function __construct()
@@ -71,21 +72,63 @@ class AuthController extends ApiController
     }
 
     /**
-     * Logout user (Invalidate the token)
-     */
-    public function logout()
-    {
-        Auth::guard('api')->logout();
-
-        return $this->successResponse(null, 'User successfully signed out');
-    }
-
-    /**
      * Get the authenticated User
      */
     public function userProfile()
     {
         return $this->successResponse(auth('api')->user(), 'User profile retrieved successfully');
+    }
+
+    /**
+     * Update user profile
+     */
+    public function updateProfile(Request $request)
+    {
+        /** @var User $user */
+        $user = auth('api')->user();
+        
+        $validator = Validator::make($request->all(), [
+            'name' => 'sometimes|string|max:255',
+            'email' => 'sometimes|string|email|max:255|unique:users,email,' . $user->id,
+        ]);
+
+        if ($validator->fails()) {
+            return $this->validationErrorResponse($validator->errors());
+        }
+
+        $user->update($request->only(['name', 'email']));
+
+        return $this->successResponse($user, 'Profile updated successfully');
+    }
+
+    /**
+     * Update user password
+     */
+    public function updatePassword(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'current_password' => 'required|string',
+            'new_password' => 'required|string|min:6|confirmed',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->validationErrorResponse($validator->errors());
+        }
+
+        /** @var User $user */
+        $user = auth('api')->user();
+
+        // Check current password
+        if (!Hash::check($request->current_password, $user->password)) {
+            return $this->badRequestResponse('Current password is incorrect');
+        }
+
+        // Update password
+        $user->update([
+            'password' => Hash::make($request->new_password)
+        ]);
+
+        return $this->successResponse(null, 'Password updated successfully');
     }
 
     /**
