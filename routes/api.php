@@ -31,12 +31,11 @@ Route::controller(AuthController::class)->group(function () {
 // Wilayah routes (no authentication required)
 Route::controller(WilayahController::class)->group(function () {
     Route::get('provinces', 'getProvinces');
-    Route::post('provinces/clear-cache', 'clearCache');
-    Route::get('provinces/cache-status', 'getCacheStatus');
+    Route::post('provinces/clear-cache', 'clearCache')->middleware('api.key');
     
     // Regency routes
     Route::get('provinces/{provinceCode}', 'getRegencies');
-    Route::post('provinces/{provinceCode}/clear-cache', 'clearRegenciesCache');
+    Route::post('provinces/{provinceCode}/clear-cache', 'clearRegenciesCache')->middleware('api.key');
 });
 
 // Public image access (no authentication required)

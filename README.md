@@ -140,12 +140,12 @@ Endpoint registrasi memerlukan header `X-API-Key` untuk keamanan.
 | PUT | `/api/user-password` | Update password user | JWT |
 
 ### Data Geografis (Publik)
-| Method | Endpoint | Deskripsi |
-|--------|----------|-----------|
-| GET | `/api/provinces` | Ambil semua provinsi |
-| GET | `/api/provinces/{code}` | Ambil kabupaten berdasarkan provinsi |
-| POST | `/api/provinces/clear-cache` | Bersihkan cache provinsi |
-| GET | `/api/provinces/cache-status` | Status cache |
+| Method | Endpoint | Deskripsi | Auth Diperlukan |
+|--------|----------|-----------|-----------------|
+| GET | `/api/provinces` | Ambil semua provinsi | Tidak |
+| GET | `/api/provinces/{code}` | Ambil kabupaten berdasarkan provinsi | Tidak |
+| POST | `/api/provinces/clear-cache` | Bersihkan cache provinsi | X-API-Key |
+| POST | `/api/provinces/{code}/clear-cache` | Bersihkan cache kabupaten | X-API-Key |
 
 ### Tim (Terproteksi)
 | Method | Endpoint | Deskripsi |

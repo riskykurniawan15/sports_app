@@ -342,6 +342,94 @@
 					]
 				},
 				{
+					"name": "provinces-clear-cache",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "X-API-Key",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "risky",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/api/provinces/clear-cache",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"api",
+								"provinces",
+								"clear-cache"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "provinces-clear-cache",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{server}}/api/provinces/clear-cache",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"provinces",
+										"clear-cache"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 30 Jul 2025 10:51:53 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": {\n        \"status\": 200,\n        \"message\": \"Provinces cache cleared successfully\"\n    },\n    \"data\": null\n}"
+						}
+					]
+				},
+				{
 					"name": "regencies",
 					"request": {
 						"auth": {
@@ -426,6 +514,96 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"code\": {\n        \"status\": 200,\n        \"message\": \"Regencies retrieved successfully\"\n    },\n    \"data\": {\n        \"province\": {\n            \"code\": \"32\",\n            \"name\": \"Jawa Barat\"\n        },\n        \"regencies\": [\n            {\n                \"code\": \"32.04\",\n                \"name\": \"Kabupaten Bandung\"\n            },\n            {\n                \"code\": \"32.17\",\n                \"name\": \"Kabupaten Bandung Barat\"\n            },\n            {\n                \"code\": \"32.16\",\n                \"name\": \"Kabupaten Bekasi\"\n            },\n            {\n                \"code\": \"32.01\",\n                \"name\": \"Kabupaten Bogor\"\n            },\n            {\n                \"code\": \"32.07\",\n                \"name\": \"Kabupaten Ciamis\"\n            },\n            {\n                \"code\": \"32.03\",\n                \"name\": \"Kabupaten Cianjur\"\n            },\n            {\n                \"code\": \"32.09\",\n                \"name\": \"Kabupaten Cirebon\"\n            },\n            {\n                \"code\": \"32.05\",\n                \"name\": \"Kabupaten Garut\"\n            },\n            {\n                \"code\": \"32.12\",\n                \"name\": \"Kabupaten Indramayu\"\n            },\n            {\n                \"code\": \"32.15\",\n                \"name\": \"Kabupaten Karawang\"\n            },\n            {\n                \"code\": \"32.08\",\n                \"name\": \"Kabupaten Kuningan\"\n            },\n            {\n                \"code\": \"32.10\",\n                \"name\": \"Kabupaten Majalengka\"\n            },\n            {\n                \"code\": \"32.18\",\n                \"name\": \"Kabupaten Pangandaran\"\n            },\n            {\n                \"code\": \"32.14\",\n                \"name\": \"Kabupaten Purwakarta\"\n            },\n            {\n                \"code\": \"32.13\",\n                \"name\": \"Kabupaten Subang\"\n            },\n            {\n                \"code\": \"32.02\",\n                \"name\": \"Kabupaten Sukabumi\"\n            },\n            {\n                \"code\": \"32.11\",\n                \"name\": \"Kabupaten Sumedang\"\n            },\n            {\n                \"code\": \"32.06\",\n                \"name\": \"Kabupaten Tasikmalaya\"\n            },\n            {\n                \"code\": \"32.73\",\n                \"name\": \"Kota Bandung\"\n            },\n            {\n                \"code\": \"32.79\",\n                \"name\": \"Kota Banjar\"\n            },\n            {\n                \"code\": \"32.75\",\n                \"name\": \"Kota Bekasi\"\n            },\n            {\n                \"code\": \"32.71\",\n                \"name\": \"Kota Bogor\"\n            },\n            {\n                \"code\": \"32.77\",\n                \"name\": \"Kota Cimahi\"\n            },\n            {\n                \"code\": \"32.74\",\n                \"name\": \"Kota Cirebon\"\n            },\n            {\n                \"code\": \"32.76\",\n                \"name\": \"Kota Depok\"\n            },\n            {\n                \"code\": \"32.72\",\n                \"name\": \"Kota Sukabumi\"\n            },\n            {\n                \"code\": \"32.78\",\n                \"name\": \"Kota Tasikmalaya\"\n            }\n        ]\n    },\n    \"meta\": {\n        \"total\": 27,\n        \"search\": null,\n        \"cache_info\": {\n            \"provinces\": {\n                \"has_cache\": true,\n                \"cache_time\": 86400,\n                \"cache_key\": \"wilayah_provinces\"\n            },\n            \"regencies\": {\n                \"cache_time\": 86400,\n                \"cache_pattern\": \"wilayah_regencies_*\"\n            }\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "regencies-clear-cache",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "X-API-Key",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "risky",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/api/provinces/32/clear-cache",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"api",
+								"provinces",
+								"32",
+								"clear-cache"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "regencies-clear-cache",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{server}}/api/provinces/32/clear-cache",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"provinces",
+										"32",
+										"clear-cache"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 30 Jul 2025 10:52:03 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": {\n        \"status\": 200,\n        \"message\": \"Regencies cache cleared for province code: 32\"\n    },\n    \"data\": null\n}"
 						}
 					]
 				}
