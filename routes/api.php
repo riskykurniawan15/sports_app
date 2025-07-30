@@ -7,6 +7,7 @@ use App\Http\Controllers\WilayahController;
 use App\Http\Controllers\FileUploadController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\PositionController;
+use App\Http\Controllers\PlayerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,9 +63,18 @@ Route::middleware('auth:api')->group(function () {
         Route::delete('teams/{id}', 'destroy');
     });
 
-    // Public position routes (no authentication required)
+        // Public position routes (no authentication required)
     Route::controller(PositionController::class)->group(function () {
         Route::get('positions', 'index');
         Route::get('positions/{id}', 'show');
     });
-}); 
+
+    // Player routes (protected)
+    Route::controller(PlayerController::class)->group(function () {
+        Route::get('players', 'index');
+        Route::post('players', 'store');
+        Route::get('players/{id}', 'show');
+        Route::put('players/{id}', 'update');
+        Route::delete('players/{id}', 'destroy');
+    });
+} ); 
