@@ -2318,3 +2318,5 @@ Modifikasi `app/Traits/ApiResponse.php` untuk mengubah struktur respons.
 Klik tombol di bawah untuk langsung import collection ke Postman:
 
 [![Import ke Postman](https://run.pstmn.io/button.svg)](https://raw.githubusercontent.com/riskykurniawan15/sports_app/refs/heads/master/sports.postman_collection.json)
+
+Atau buka halaman documenter postman https://documenter.getpostman.com/view/46987795/2sB3B8rt6C
