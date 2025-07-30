@@ -9,6 +9,7 @@ use App\Http\Controllers\TeamController;
 use App\Http\Controllers\PositionController;
 use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\MatchController;
+use App\Http\Controllers\MatchActivityController;
 
 /*
 |--------------------------------------------------------------------------
@@ -83,8 +84,20 @@ Route::middleware('auth:api')->group(function () {
     Route::controller(MatchController::class)->group(function () {
         Route::get('matches', 'index');
         Route::post('matches', 'store');
+        Route::get('matches/activity-types', [MatchActivityController::class, 'activityTypes']);
         Route::get('matches/{id}', 'show');
         Route::put('matches/{id}', 'update');
         Route::delete('matches/{id}', 'destroy');
     });
+
+    // Match Activity routes (protected)
+    Route::controller(MatchActivityController::class)->group(function () {
+        Route::get('matches/{matchId}/activities', 'index');
+        Route::post('matches/{matchId}/activities', 'store');
+        Route::get('matches/{matchId}/activities/{id}', 'show');
+        Route::delete('matches/{matchId}/activities/{id}', 'destroy');
+        Route::get('matches/{matchId}/timeline', 'matchTimeline');
+        Route::get('matches/{matchId}/stats', 'matchStats');
+    });
+
 } ); 

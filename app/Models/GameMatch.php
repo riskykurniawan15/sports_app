@@ -197,4 +197,92 @@ class GameMatch extends Model
         
         return $this->match_datetime->isPast() ? 'completed' : 'upcoming';
     }
+
+    /**
+     * Calculate match result and update metadata
+     */
+    public function calculateMatchResult()
+    {
+        // Regular goals (excluding own goals)
+        $homeRegularGoals = MatchActivity::where('match_id', $this->id)
+            ->where('team_id', $this->home_team_id)
+            ->where('activity', 'goal')
+            ->count();
+
+        $awayRegularGoals = MatchActivity::where('match_id', $this->id)
+            ->where('team_id', $this->away_team_id)
+            ->where('activity', 'goal')
+            ->count();
+
+        // Own goals - count for the opposing team
+        $homeOwnGoals = MatchActivity::where('match_id', $this->id)
+            ->where('team_id', $this->home_team_id)
+            ->where('activity', 'own_goal')
+            ->count();
+
+        $awayOwnGoals = MatchActivity::where('match_id', $this->id)
+            ->where('team_id', $this->away_team_id)
+            ->where('activity', 'own_goal')
+            ->count();
+
+        // Calculate final scores
+        $homeGoals = $homeRegularGoals + $awayOwnGoals; // Home gets goals from away team's own goals
+        $awayGoals = $awayRegularGoals + $homeOwnGoals; // Away gets goals from home team's own goals
+
+        // Determine match status and winner
+        $status = 'draw';
+        $winnerTeam = null;
+        
+        if ($homeGoals > $awayGoals) {
+            $status = 'home-win';
+            $winnerTeam = $this->home_team_id;
+        } elseif ($awayGoals > $homeGoals) {
+            $status = 'away-win';
+            $winnerTeam = $this->away_team_id;
+        }
+
+        // Update match metadata
+        $metadata = $this->match_metadata ?? [];
+        $metadata['status'] = $status;
+        $metadata['scores_home'] = $homeGoals;
+        $metadata['scores_away'] = $awayGoals;
+        
+        // Add winner_team only if not draw
+        if ($winnerTeam) {
+            $metadata['winner_team'] = $winnerTeam;
+        } else {
+            // Remove winner_team if exists (in case of draw)
+            unset($metadata['winner_team']);
+        }
+
+        $this->match_metadata = $metadata;
+        $this->save();
+
+        return [
+            'status' => $status,
+            'scores_home' => $homeGoals,
+            'scores_away' => $awayGoals,
+            'winner_team' => $winnerTeam
+        ];
+    }
+
+    /**
+     * Check if match has started
+     */
+    public function hasStarted()
+    {
+        return MatchActivity::where('match_id', $this->id)
+            ->where('activity', 'match_start')
+            ->exists();
+    }
+
+    /**
+     * Check if match has ended
+     */
+    public function hasEnded()
+    {
+        return MatchActivity::where('match_id', $this->id)
+            ->where('activity', 'match_end')
+            ->exists();
+    }
 }

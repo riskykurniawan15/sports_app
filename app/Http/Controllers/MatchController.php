@@ -88,6 +88,12 @@ class MatchController extends ApiController
             return $this->notFoundResponse('Match not found');
         }
         
+        // If match has ended but no result calculated, calculate it
+        if ($match->hasEnded() && (!isset($match->match_metadata['status']) || !isset($match->match_metadata['scores_home']))) {
+            $match->calculateMatchResult();
+            $match->refresh();
+        }
+        
         return $this->successResponse($match, 'Match retrieved successfully');
     }
 
