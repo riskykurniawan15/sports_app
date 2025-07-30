@@ -6,6 +6,7 @@ use App\Models\MatchActivity;
 use App\Models\GameMatch;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 class MatchActivityController extends ApiController
 {
@@ -192,5 +193,204 @@ class MatchActivityController extends ApiController
         ];
         
         return $this->successResponse($stats, 'Match statistics retrieved successfully');
+    }
+
+    /**
+     * Get comprehensive match report
+     */
+    public function matchReport($matchId)
+    {
+        // Validate match exists
+        $match = GameMatch::with(['homeTeam', 'awayTeam'])->find($matchId);
+        if (!$match) {
+            return $this->notFoundResponse('Match not found');
+        }
+
+        // Get all goal activities with player info
+        $goalActivities = MatchActivity::with(['player', 'team'])
+            ->where('match_id', $matchId)
+            ->whereIn('activity', ['goal', 'own_goal'])
+            ->orderBy('time_activity', 'asc')
+            ->get();
+
+        // Calculate goals per team
+        $homeRegularGoals = MatchActivity::where('match_id', $matchId)
+            ->where('team_id', $match->home_team_id)
+            ->where('activity', 'goal')
+            ->count();
+
+        $awayRegularGoals = MatchActivity::where('match_id', $matchId)
+            ->where('team_id', $match->away_team_id)
+            ->where('activity', 'goal')
+            ->count();
+
+        $homeOwnGoals = MatchActivity::where('match_id', $matchId)
+            ->where('team_id', $match->home_team_id)
+            ->where('activity', 'own_goal')
+            ->count();
+
+        $awayOwnGoals = MatchActivity::where('match_id', $matchId)
+            ->where('team_id', $match->away_team_id)
+            ->where('activity', 'own_goal')
+            ->count();
+
+        $finalHomeScore = $homeRegularGoals + $awayOwnGoals;
+        $finalAwayScore = $awayRegularGoals + $homeOwnGoals;
+
+        // Determine match result
+        $homeWin = $finalHomeScore > $finalAwayScore;
+        $draw = $finalHomeScore == $finalAwayScore;
+
+        // Calculate team performance from all matches (from match datetime + 2 hours)
+        $matchDateTime = $match->match_datetime;
+        $cutoffDateTime = date('Y-m-d H:i:s', strtotime($matchDateTime . ' +2 hours'));
+
+        // Home team performance
+        $homeTeamMatches = GameMatch::where(function($query) use ($match) {
+                $query->where('home_team_id', $match->home_team_id)
+                      ->orWhere('away_team_id', $match->home_team_id);
+            })
+            ->where('match_datetime', '<=', $cutoffDateTime)
+            ->get();
+
+        $homeWins = 0;
+        $homeLosses = 0;
+        $homeDraws = 0;
+
+        foreach ($homeTeamMatches as $homeMatch) {
+            if (!$homeMatch->match_metadata || !isset($homeMatch->match_metadata['status'])) {
+                continue;
+            }
+
+            $winnerTeam = $homeMatch->match_metadata['winner_team'] ?? null;
+
+            if ($winnerTeam === null) {
+                // Draw
+                $homeDraws++;
+            } elseif ($winnerTeam == $match->home_team_id) {
+                // Home team won
+                $homeWins++;
+            } else {
+                // Away team won
+                $homeLosses++;
+            }
+        }
+
+        // Away team performance
+        $awayTeamMatches = GameMatch::where(function($query) use ($match) {
+                $query->where('home_team_id', $match->away_team_id)
+                      ->orWhere('away_team_id', $match->away_team_id);
+            })
+            ->where('match_datetime', '<=', $cutoffDateTime)
+            ->get();
+
+        $awayWins = 0;
+        $awayLosses = 0;
+        $awayDraws = 0;
+
+        foreach ($awayTeamMatches as $awayMatch) {
+            if (!$awayMatch->match_metadata || !isset($awayMatch->match_metadata['status'])) {
+                continue;
+            }
+
+            $winnerTeam = $awayMatch->match_metadata['winner_team'] ?? null;
+
+            if ($winnerTeam === null) {
+                // Draw
+                $awayDraws++;
+            } elseif ($winnerTeam == $match->away_team_id) {
+                // Away team won
+                $awayWins++;
+            } else {
+                // Home team won
+                $awayLosses++;
+            }
+        }
+
+        // Get top scorers
+        $topScorers = MatchActivity::with(['player', 'team'])
+            ->where('match_id', $matchId)
+            ->where('activity', 'goal')
+            ->whereNotNull('player_id')
+            ->select('player_id', 'team_id', DB::raw('count(*) as goal_count'))
+            ->groupBy('player_id', 'team_id')
+            ->orderBy('goal_count', 'desc')
+            ->get()
+            ->map(function ($item) {
+                return [
+                    'player_id' => $item->player_id,
+                    'player_name' => $item->player ? $item->player->name : 'Unknown',
+                    'team_id' => $item->team_id,
+                    'team_name' => $item->team ? $item->team->name : 'Unknown',
+                    'goals' => $item->goal_count
+                ];
+            });
+
+        // Format goal timeline
+        $goalTimeline = $goalActivities->map(function ($activity) use ($match) {
+            $isOwnGoal = $activity->activity === 'own_goal';
+            $scoringTeam = $isOwnGoal ? 
+                ($activity->team_id == $match->home_team_id ? $match->awayTeam : $match->homeTeam) :
+                $activity->team;
+            
+            return [
+                'time' => $activity->time_activity->format('H:i:s'),
+                'player_id' => $activity->player_id,
+                'player_name' => $activity->player ? $activity->player->name : 'Unknown',
+                'team_id' => $scoringTeam ? $scoringTeam->id : null,
+                'team_name' => $scoringTeam ? $scoringTeam->name : 'Unknown',
+                'activity' => $activity->activity,
+                'activity_description' => $activity->activity_description,
+                'detail' => $activity->detail,
+                'is_own_goal' => $isOwnGoal,
+                'own_goal_player' => $isOwnGoal ? ($activity->player ? $activity->player->name : 'Unknown') : null
+            ];
+        });
+
+        $report = [
+            'match_info' => [
+                'id' => $match->id,
+                'venue' => $match->venue,
+                'match_datetime' => $match->match_datetime,
+                'home_team' => [
+                    'id' => $match->homeTeam ? $match->homeTeam->id : null,
+                    'name' => $match->homeTeam ? $match->homeTeam->name : 'Unknown'
+                ],
+                'away_team' => [
+                    'id' => $match->awayTeam ? $match->awayTeam->id : null,
+                    'name' => $match->awayTeam ? $match->awayTeam->name : 'Unknown'
+                ]
+            ],
+            'match_result' => [
+                'final_score' => "{$finalHomeScore} - {$finalAwayScore}",
+                'home_score' => $finalHomeScore,
+                'away_score' => $finalAwayScore,
+                'result' => $draw ? 'draw' : ($homeWin ? 'home-win' : 'away-win'),
+                'winner_team' => $draw ? null : ($homeWin ? $match->home_team_id : $match->away_team_id)
+            ],
+            'team_performance' => [
+                'home_team' => [
+                    'wins' => $homeWins,
+                    'losses' => $homeLosses,
+                    'draws' => $homeDraws,
+                    'total_matches' => $homeWins + $homeLosses + $homeDraws,
+                    'regular_goals' => $homeRegularGoals,
+                    'own_goals_conceded' => $homeOwnGoals
+                ],
+                'away_team' => [
+                    'wins' => $awayWins,
+                    'losses' => $awayLosses,
+                    'draws' => $awayDraws,
+                    'total_matches' => $awayWins + $awayLosses + $awayDraws,
+                    'regular_goals' => $awayRegularGoals,
+                    'own_goals_conceded' => $awayOwnGoals
+                ]
+            ],
+            'goal_timeline' => $goalTimeline,
+            'top_scorers' => $topScorers,
+            'match_metadata' => $match->match_metadata
+        ];
+
+        return $this->successResponse($report, 'Match report retrieved successfully');
     }
 }

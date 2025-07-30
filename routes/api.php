@@ -98,6 +98,7 @@ Route::middleware('auth:api')->group(function () {
         Route::delete('matches/{matchId}/activities/{id}', 'destroy');
         Route::get('matches/{matchId}/timeline', 'matchTimeline');
         Route::get('matches/{matchId}/stats', 'matchStats');
+        Route::get('matches/{matchId}/match-report', 'matchReport');
     });
 
 } ); 
