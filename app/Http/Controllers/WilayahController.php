@@ -31,12 +31,11 @@ class WilayahController extends ApiController
             ? "Provinces filtered by search: {$search}"
             : 'All provinces retrieved successfully';
 
-        return $this->successResponse([
-            'provinces' => $provinces,
+        return $this->successResponse($provinces, $message, 200, [
             'total' => count($provinces),
             'search' => $search,
             'cache_info' => $this->wilayahService->getCacheStatus()
-        ], $message);
+        ]);
     }
 
     /**
@@ -68,11 +67,12 @@ class WilayahController extends ApiController
 
         return $this->successResponse([
             'province' => $data['province'],
-            'regencies' => $data['regencies'],
+            'regencies' => $data['regencies']
+        ], $message, 200, [
             'total' => count($data['regencies']),
             'search' => $search,
             'cache_info' => $this->wilayahService->getCacheStatus()
-        ], $message);
+        ]);
     }
 
     /**
