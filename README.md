@@ -2260,7 +2260,7 @@ sports_app/
         └── images/
 ```
 
-## 🚨 Penanganan Error
+## 🚨 Standarisasi API
 
 Semua respons API mengikuti format terstandarisasi:
 
@@ -2301,10 +2301,6 @@ Update aturan validasi di file model terkait atau buat aturan validasi kustom ba
 ### Mengubah Format Respons API
 Modifikasi `app/Traits/ApiResponse.php` untuk mengubah struktur respons.
 
-## 📝 Lisensi
-
-Proyek ini adalah perangkat lunak open-source yang dilisensikan di bawah [lisensi MIT](https://opensource.org/licenses/MIT).
-
 ## 🤝 Kontribusi
 
 1. Fork repository
@@ -2313,6 +2309,7 @@ Proyek ini adalah perangkat lunak open-source yang dilisensikan di bawah [lisens
 4. Push ke branch (`git push origin feature/amazing-feature`)
 5. Buka Pull Request
 
-## 📞 Dukungan
+## 📮 Import ke Postman
+Klik tombol di bawah untuk langsung import collection ke Postman:
 
-Untuk dukungan dan pertanyaan, silakan hubungi tim pengembangan atau buat issue di repository.
+[![Import ke Postman](https://run.pstmn.io/button.svg)](https://raw.githubusercontent.com/riskykurniawan15/sports_app/refs/heads/master/sports.postman_collection.json)
