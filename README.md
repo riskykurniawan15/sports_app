@@ -161,7 +161,7 @@ Endpoint registrasi memerlukan header `X-API-Key` untuk keamanan.
 | PUT | `/api/teams/{id}` | Update tim |
 | DELETE | `/api/teams/{id}` | Hapus tim |
 
-### Posisi (Publik)
+### Posisi (Terproteksi)
 | Method | Endpoint | Deskripsi |
 |--------|----------|-----------|
 | GET | `/api/positions` | Daftar semua posisi |
